@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const Guid = require('guid');
-
+require('dotenv').config();
 // New Schema
 const AwesomeSliderSchema = new Schema({
     _id: {
@@ -42,27 +42,11 @@ AwesomeSliderSchema.pre('update', function (next) {
     next();
 });
 
-AwesomeSliderSchema.statics.first = function () {
-    const Model = this;
-    return new Promise( (resolve, reject) => {
-        try {
-           Model.findOne((error, success) => {
-                if (error) {
-                    return reject(error);
-                }
-                return resolve(success);
-            });
-        } catch (e) {
-            reject(e);
-        }
-    });
-};
-
 /**
  * @return {string}
  */
-AwesomeSliderSchema.statics.URLAttribute = function () {
-    return process.env.API_URL + '/' + 'uploads/';
+AwesomeSliderSchema.statics.URLAttribute = function (image) {
+    return process.env.API_URL + '/' + 'uploads/' + image;
 };
 
 module.exports = model('AwesomeSlider', AwesomeSliderSchema);

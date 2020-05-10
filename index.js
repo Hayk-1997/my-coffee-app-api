@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const logs = require('./helpers/logs');
 // Admin Models
 require('./models/Admin/Auth');
-require('./models/Admin/AwesomeSlider');
+require('./models/AwesomeSlider');
 // Coffee Models
 require('./models/Coffee/socialLogin');
 //
@@ -18,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Handle Routes
 const AdminRoutes = require('./routes');
+const CoffeeRoutes = require('./routes');
 app.use('/admin', AdminRoutes);
+// app.use('/coffee', CoffeeRoutes);
 
 app.use(function (req, res) {
     const reqpath = req.url.toString().split('?')[0];

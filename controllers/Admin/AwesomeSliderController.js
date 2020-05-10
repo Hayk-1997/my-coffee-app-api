@@ -29,7 +29,6 @@ class AwesomeSliderController {
                 "en.description": "string",
                 "arm.title": "string",
                 "arm.description": "string",
-                "image": "string"
             };
             const data = JSON.parse(req.body.form);
             validator(data, validationRule, {}, (err, status) => {
@@ -40,7 +39,7 @@ class AwesomeSliderController {
             if (req.file) {
                 data.image = req.file.path;
             }
-            const response = await AwesomeSliderModel.first();
+            const response = await AwesomeSliderModel.findOne();
             // Update Getting data
             if (response.id) {
                 await AwesomeSliderModel.updateOne(data, (error, success) => {
