@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 const AwesomeSliderModel = mongoose.model('AwesomeSlider');
+const AbstractController = require('../AbstractController');
 const logs = require('../../helpers/logs');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 
 
-class AwesomeSliderController {
+class AwesomeSliderController extends AbstractController {
+    constructor(legs) {
+        super(legs);
+        this.legs = legs;
+    }
     // Get AwesomeSlider Data
-    get (req, res) {
+    async get (req, res) {
         try {
-            const response = AwesomeSliderModel.findOne();
-            debugger
-            response.image =  123; // AwesomeSliderModel.URLAttribute(response.image);
+            const response = await AwesomeSliderModel.findOne();
             if (response._id) {
                 return successMessage(res, null, 'success', response);
             } else {

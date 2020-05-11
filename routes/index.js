@@ -6,7 +6,7 @@ const router = Router();
 const AdminRoutes = require('./admin-routes');
 // Use Coffee Routes
 const CoffeeRoutes = require('./coffee-routes');
-router.use(AdminRoutes);
-router.use(CoffeeRoutes);
+router.use('/admin', AdminRoutes);
+router.use('/coffee', CoffeeRoutes);
 
 module.exports = router;

@@ -42,11 +42,11 @@ AwesomeSliderSchema.pre('update', function (next) {
     next();
 });
 
-/**
- * @return {string}
- */
-AwesomeSliderSchema.statics.URLAttribute = function (image) {
-    return process.env.API_URL + '/' + 'uploads/' + image;
-};
+// /**
+//  * @return {string}
+//  */
+// AwesomeSliderSchema.statics.URLAttribute = function (image) {
+//     return process.env.API_URL + '/' + image;
+// };
 
 module.exports = model('AwesomeSlider', AwesomeSliderSchema);

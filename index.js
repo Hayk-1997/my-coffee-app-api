@@ -8,7 +8,7 @@ const logs = require('./helpers/logs');
 require('./models/Admin/Auth');
 require('./models/AwesomeSlider');
 // Coffee Models
-require('./models/Coffee/socialLogin');
+require('./models/Coffee/SocialLogin/socialLogin');
 //
 const app = express();
 app.use(cors());
@@ -17,10 +17,8 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Handle Routes
-const AdminRoutes = require('./routes');
-const CoffeeRoutes = require('./routes');
-app.use('/admin', AdminRoutes);
-// app.use('/coffee', CoffeeRoutes);
+const Routes = require('./routes');
+app.use(Routes);
 
 app.use(function (req, res) {
     const reqpath = req.url.toString().split('?')[0];

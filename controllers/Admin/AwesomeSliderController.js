@@ -49,7 +49,7 @@ class AwesomeSliderController {
                     if (fs.existsSync(response.image) && response.id) {
                         fs.unlinkSync(response.image);
                     }
-                    return successMessage(res);
+                    return successMessage(res, null, 'Data updated successfully');
                 });
             } else {
                 return errorMessage(res);
