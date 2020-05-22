@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const AwesomeSliderModel = mongoose.model('AwesomeSlider');
+// const AbstractController = require('../AbstractController');
+const { setImagePath } = require('../../helpers/motations');
 const logs = require('../../helpers/logs');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
@@ -37,7 +39,7 @@ class AwesomeSliderController {
                 }
             });
             if (req.file) {
-                data.image = req.file.path;
+                data.image = setImagePath(req.file.destination, req.file.filename);
             }
             const response = await AwesomeSliderModel.findOne();
             // Update Getting data
@@ -46,7 +48,7 @@ class AwesomeSliderController {
                     if (error) {
                         return errorMessage(res);
                     }
-                    if (fs.existsSync(response.image) && response.id) {
+                    if (fs.existsSync(response.image) && response.id && req.file) {
                         fs.unlinkSync(response.image);
                     }
                     return successMessage(res, null, 'Data updated successfully');
