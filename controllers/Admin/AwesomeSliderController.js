@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const AwesomeSliderModel = mongoose.model('AwesomeSlider');
-// const AbstractController = require('../AbstractController');
-const { setImagePath } = require('../../helpers/motations');
+const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const logs = require('../../helpers/logs');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
@@ -14,6 +13,7 @@ class AwesomeSliderController {
         try {
             const response = await AwesomeSliderModel.findOne();
             if (response._id) {
+                response.image = getImageFullPath(response.image);
                 return successMessage(res, null, 'success', response);
             } else {
                 return errorMessage(res);

@@ -19,25 +19,16 @@ app.use(bodyParser.json());
 // Handle Routes
 const Routes = require('./routes');
 app.use(Routes);
-
-app.use(function (req, res) {
-    const reqpath = req.url.toString().split('?')[0];
-    if (fs.existsSync(__dirname + reqpath)) {
-        res.sendFile(__dirname + reqpath);
-    } else {
-        res.setHeader('Content-Type', 'text/plain');
-        res.statusCode = 404;
-        res.end('Not found');
-    }
-});
-
+//
+const path = require('path');
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('*', (req, res) => {
     res.status(404).json({ message: 'Route not found', status: 404 })
 });
 // Start run environment
+require('dotenv').config();
 const PORT = process.env.PORT || 3100;
 const connect = require('./db');
-require('dotenv').config();
 const DB = process.env.MONGO_URI;
 const listen = () => {
     logs(`Database connected at ${DB}`);
