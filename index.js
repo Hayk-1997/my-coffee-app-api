@@ -1,16 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs-extra');
 const cors = require('cors');
 const helmet = require('helmet');
 const logs = require('./helpers/logs');
-// Admin Models
-require('./models/Admin/Auth');
-require('./models/AwesomeSlider');
+const path = require('path');
+const app = express();
+// Models
+require('./models');
 // Coffee Models
 require('./models/Coffee/SocialLogin/socialLogin');
 //
-const app = express();
 app.use(cors());
 app.use(helmet());
 // parse application/x-www-form-urlencoded
@@ -20,7 +19,6 @@ app.use(bodyParser.json());
 const Routes = require('./routes');
 app.use(Routes);
 //
-const path = require('path');
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('*', (req, res) => {
     res.status(404).json({ message: 'Route not found', status: 404 })
