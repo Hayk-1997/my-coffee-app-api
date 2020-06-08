@@ -5,12 +5,14 @@ const AdminAuthMiddleware = require('../middlewares/Admin/Auth');
 // Admin Controllers
 const AuthController = require('../controllers/Admin/AuthController');
 const AwesomeSliderController = require('../controllers/Admin/AwesomeSliderController');
-
+const InfoController = require('../controllers/Admin/InfoController');
 
 // Admin Routes
 router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
 router.post('/verify-token', AuthController.verifyAdminToken);
+// router.post('/upload-icon', AdminAuthMiddleware, InfoController.uploadIcon);
+router.post('/upload-icon',  InfoController.uploadIcon);
 //
 router.get('/awesome-slider', AdminAuthMiddleware, AwesomeSliderController.get);
 router.put('/awesome-slider', AdminAuthMiddleware, upload.single('image'), AwesomeSliderController.update);

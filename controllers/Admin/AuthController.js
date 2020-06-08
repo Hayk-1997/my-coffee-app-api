@@ -15,7 +15,7 @@ class AuthController {
             const admin = await AdminModel.findByCredentials(req.body.email, req.body.password);
             if (admin && admin._id) {
                 logs(`Logged user [${admin.email}]`);
-                let token = jwt.sign({
+                const token = jwt.sign({
                     _id: admin._id,
                     expires: moment().add(1, 'days').valueOf()
                 }, secret);
