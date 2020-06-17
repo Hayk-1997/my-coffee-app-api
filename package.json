@@ -32,6 +32,8 @@
     "simple-node-logger": "^18.12.24",
     "uuid": "^3.4.0",
     "validator": "^9.4.1",
-    "validatorjs": "^3.18.1"
+    "validatorjs": "^3.18.1",
+    "winston": "^3.2.1",
+    "winston-mongodb": "^5.0.1"
   }
 }

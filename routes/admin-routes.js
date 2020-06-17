@@ -12,7 +12,8 @@ router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
 router.post('/verify-token', AuthController.verifyAdminToken);
 // router.post('/upload-icon', AdminAuthMiddleware, InfoController.uploadIcon);
-router.post('/upload-icon',  InfoController.uploadIcon);
+router.put('/info/upload-icon',  InfoController.uploadIcon);
+router.put('/info/update', InfoController.update);
 //
 router.get('/awesome-slider', AdminAuthMiddleware, AwesomeSliderController.get);
 router.put('/awesome-slider', AdminAuthMiddleware, upload.single('image'), AwesomeSliderController.update);

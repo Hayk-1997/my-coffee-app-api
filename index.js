@@ -34,5 +34,5 @@ const listen = () => {
         logs(`App listen on port ${PORT}`);
     })
 };
-// listen();
+
 connect().on('error', logs).on('disconnected', connect).once('open', listen);
