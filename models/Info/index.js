@@ -2,32 +2,7 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const Guid = require('guid');
 
-const iconField = {
-    item: {
-        download_url: {
-            type: String,
-            required: true,
-        },
-        format: {
-            type: String,
-            required: true,
-        },
-        preview_url: {
-            type: String,
-            required: true,
-        }
-    },
-    size: {
-        type: Number,
-        required: true,
-    },
-    tags: {
-        type: Array,
-        required: true,
-    }
-};
-
-const schemaFields = {
+const fields = {
     phone: {
         number: {
             type: String,
@@ -37,39 +12,112 @@ const schemaFields = {
             type: String,
             required: true,
         },
-        iconField,
+        icon: {
+            item: {
+                download_url: {
+                    type: String,
+                    required: true,
+                },
+                format: {
+                    type: String,
+                    required: true,
+                },
+                preview_url: {
+                    type: String,
+                    required: true,
+                }
+            },
+            size: {
+                type: Number,
+                required: true,
+            },
+            tags: {
+                type: Array,
+                required: true,
+            }
+        },
     },
     address: {
-       title: {
-           type: String,
-           required: true,
-       },
+        title: {
+            type: String,
+            required: true,
+        },
         description: {
             type: String,
             required: true,
         },
-        iconField,
+        icon: {
+            item: {
+                download_url: {
+                    type: String,
+                    required: true,
+                },
+                format: {
+                    type: String,
+                    required: true,
+                },
+                preview_url: {
+                    type: String,
+                    required: true,
+                }
+            },
+            size: {
+                type: Number,
+                required: true,
+            },
+            tags: {
+                type: Array,
+                required: true,
+            }
+        },
     },
     workingHours: {
-      title: {
-          type: String,
-          required: true,
-      },
-       description: {
-           type: String,
-           required: true,
-       }
+        title: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        icon: {
+            item: {
+                download_url: {
+                    type: String,
+                    required: true,
+                },
+                format: {
+                    type: String,
+                    required: true,
+                },
+                preview_url: {
+                    type: String,
+                    required: true,
+                }
+            },
+            size: {
+                type: Number,
+                required: true,
+            },
+            tags: {
+                type: Array,
+                required: true,
+            }
+        },
     },
-    iconField,
-};
+}
 
 const InfoSchema = new Schema ({
     _id: {
         type: String,
         default: () => Guid.raw(),
     },
-    en: [ schemaFields ],
-    arm: [ schemaFields ]
+    en: {
+      ...fields,
+    },
+    arm: {
+        ...fields,
+    }
 }, {
     timestamp: true,
 });
