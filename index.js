@@ -16,8 +16,8 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Handle Routes
-const Routes = require('./routes');
-app.use(Routes);
+const routes = require('./routes');
+app.use(routes);
 //
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('*', (req, res) => {
@@ -34,5 +34,5 @@ const listen = () => {
         logs(`App listen on port ${PORT}`);
     })
 };
-// listen();
+
 connect().on('error', logs).on('disconnected', connect).once('open', listen);
