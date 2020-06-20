@@ -56,22 +56,45 @@ class InfoController {
             return errorMessage(res, null, e.message);
         }
     }
+
     async update(req, res) {
         try {
             Log.info('----Start InfoController update----');
             const validationRule = {
               "en.phone.number": "required|string",
               "en.phone.description": "required|string",
+              "en.phone.icon.item.download_url": "required|string",
+              "en.phone.icon.item.format": "required|string",
+              "en.phone.icon.item.preview_url": "required|string",
+              "en.phone.icon.size": "required|string",
               "en.address.title": "required|string",
               "en.address.description": "required|string",
+              "en.address.icon.item.format": "required|string",
+              "en.address.icon.item.preview_url": "required|string",
+              "en.address.icon.size": "required|string",
               "en.workingHours.title": "required|string",
               "en.workingHours.description": "required|string",
+              "en.workingHours.icon.item.format": "required|string",
+              "en.workingHours.icon.item.preview_url": "required|string",
+              "en.workingHours.icon.size": "required|string",
               "arm.phone.number": "required|string",
               "arm.phone.description": "required|string",
+              "arm.phone.icon.item.download_url": "required|string",
+              "arm.phone.icon.item.format": "required|string",
+              "arm.phone.icon.item.preview_url": "required|string",
+              "arm.phone.icon.size": "required|string",
               "arm.address.title": "required|string",
               "arm.address.description": "required|string",
+              "arm.address.icon.item.download_url": "required|string",
+              "arm.address.icon.item.format": "required|string",
+              "arm.address.icon.item.preview_url": "required|string",
+              "arm.address.icon.size": "required|string",
               "arm.workingHours.title": "required|string",
               "arm.workingHours.description": "required|string",
+              "arm.workingHours.icon.item.download_url": "required|string",
+              "arm.workingHours.icon.item.format": "required|string",
+              "arm.workingHours.icon.item.preview_url": "required|string",
+              "arm.workingHours.icon.size": "required|string",
             };
 
             const data = req.body;
@@ -95,6 +118,24 @@ class InfoController {
             }
         } catch (e) {
             Log.info('----InfoController update:[Catch Error]----');
+            Log.info(`----[Error]: ${JSON.stringify(e.message)}----`);
+            return errorMessage(res, null, e.message);
+        }
+    }
+
+    async get(req, res) {
+        try {
+            Log.info('----Start InfoController get----');
+            const response = await InfoModel.findOne();
+            if (response._id) {
+                Log.info(`----[InfoModel.get Success]: ${JSON.stringify(response)}----`);
+                return successMessage(res, null, 'success', response);
+            } else {
+                Log.info(`----[InfoModel.get Error]:----`);
+                return errorMessage(res);
+            }
+        } catch (e) {
+            Log.info('----InfoController get:[Catch Error]----');
             Log.info(`----[Error]: ${JSON.stringify(e.message)}----`);
             return errorMessage(res, null, e.message);
         }
