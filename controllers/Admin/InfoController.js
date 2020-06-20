@@ -66,35 +66,35 @@ class InfoController {
               "en.phone.icon.item.download_url": "required|string",
               "en.phone.icon.item.format": "required|string",
               "en.phone.icon.item.preview_url": "required|string",
-              "en.phone.icon.size": "required|string",
+              "en.phone.icon.size": "required|numeric",
               "en.address.title": "required|string",
               "en.address.description": "required|string",
               "en.address.icon.item.format": "required|string",
               "en.address.icon.item.preview_url": "required|string",
-              "en.address.icon.size": "required|string",
+              "en.address.icon.size": "required|numeric",
               "en.workingHours.title": "required|string",
               "en.workingHours.description": "required|string",
               "en.workingHours.icon.item.format": "required|string",
               "en.workingHours.icon.item.preview_url": "required|string",
-              "en.workingHours.icon.size": "required|string",
+              "en.workingHours.icon.size": "required|numeric",
               "arm.phone.number": "required|string",
               "arm.phone.description": "required|string",
               "arm.phone.icon.item.download_url": "required|string",
               "arm.phone.icon.item.format": "required|string",
               "arm.phone.icon.item.preview_url": "required|string",
-              "arm.phone.icon.size": "required|string",
+              "arm.phone.icon.size": "required|numeric",
               "arm.address.title": "required|string",
               "arm.address.description": "required|string",
               "arm.address.icon.item.download_url": "required|string",
               "arm.address.icon.item.format": "required|string",
               "arm.address.icon.item.preview_url": "required|string",
-              "arm.address.icon.size": "required|string",
+              "arm.address.icon.size": "required|numeric",
               "arm.workingHours.title": "required|string",
               "arm.workingHours.description": "required|string",
               "arm.workingHours.icon.item.download_url": "required|string",
               "arm.workingHours.icon.item.format": "required|string",
               "arm.workingHours.icon.item.preview_url": "required|string",
-              "arm.workingHours.icon.size": "required|string",
+              "arm.workingHours.icon.size": "required|numeric",
             };
 
             const data = req.body;
@@ -108,10 +108,8 @@ class InfoController {
                     if (error) {
                         Log.info('----InfoController update: [Error]----');
                         Log.info(`----[Error]: ${JSON.stringify(error)}----`);
-                        return errorMessage(res);
                     } else {
                         Log.info('----InfoController update:Success----');
-                        return successMessage(res, null, 'Data updated successfully', success);
                     }
                 });
                 res.send({messages: updatedInfo})

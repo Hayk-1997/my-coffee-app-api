@@ -12,7 +12,7 @@ router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
 router.post('/verify-token', AuthController.verifyAdminToken);
 router.put('/info/upload-icon',  InfoController.uploadIcon);
-router.put('/info/update', InfoController.update);
+router.put('/info-update', InfoController.update);
 router.get('/info', InfoController.get);
 //
 router.get('/awesome-slider', AdminAuthMiddleware, AwesomeSliderController.get);
