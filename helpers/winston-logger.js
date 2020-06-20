@@ -6,10 +6,11 @@ const {
 
 require('winston-mongodb');
 const __DIR__ = './storage/';
+const date = new Date();
 const logger = createLogger({
     transports: [
         new transports.File({
-            filename: __DIR__  + 'info.log',
+            filename: __DIR__  + date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear() +'-info.log',
             level: 'info',
             format: format.combine(format.timestamp(), format.json()),
         }),

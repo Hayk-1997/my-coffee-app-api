@@ -105,7 +105,7 @@ const fields = {
             }
         },
     },
-}
+};
 
 const InfoSchema = new Schema ({
     _id: {
@@ -116,7 +116,7 @@ const InfoSchema = new Schema ({
       ...fields,
     },
     arm: {
-        ...fields,
+       ...fields,
     }
 }, {
     timestamp: true,
