@@ -21,10 +21,6 @@ const AdminSchema = new Schema({
         type: String,
         default: () => Guid.raw()
     },
-    name: {
-        type: String,
-        required: true
-    },
     email: {
         type     : String,
         required : true,
