@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const Info = require('../models/Info');
+require('../models');
+const InfoModel = mongoose.model('Info');
 const logs = require('./../helpers/logs');
 
-const initialData = {
+const fields = {
     phone: {
         number: '094066112',
         description: 'Phone Description',
@@ -44,24 +45,26 @@ const initialData = {
     },
 };
 
-const InfoSeeder = (initialData) => {
-    try {
-        const data = new Info({ initialData });
-        data.save(function(err) {
-            if (err) throw err;
-            console.log('data has ben seeded');
-        });
-        console.log(data);
-        // Info.insertOne(initialData, (err, created) => {
-        //     if (err) {
-        //         logs(`Error on InfoSeeder:: Error: ..:: ${err.message} ::..`, 'error');
-        //     } else {
-        //         logs(`Success on InfoSeeder:: [${created._id}]`);
-        //     }
-        // })
-    } catch (e) {
-        logs(`Error on InfoSeeder:: Error: ..:: ${e.message} ::..`, 'error');
+const data = {
+    en: {
+        ...fields,
+    },
+    arm: {
+        ...fields,
     }
 };
 
-InfoSeeder(initialData);
+const InfoSeeding = () => {
+    return new Promise((resolve, reject) => {
+        InfoModel.create(data, (error, success) => {
+            logs(`[Seeding Error]: ${error}`);
+            logs(`[Seeding Success]: ${success}`);
+            if (success) {
+                resolve(success);
+            } else {
+                reject(error);
+            }
+        })
+    })
+};
+module.exports = InfoSeeding;
