@@ -20,19 +20,18 @@ const routes = require('./routes');
 app.use(routes);
 //
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Route not found', status: 404 })
-});
 // Start run environment
 require('dotenv').config();
 const PORT = process.env.PORT || 3100;
 const connect = require('./db');
 const DB = process.env.MONGO_URI;
+app.use('*', (req, res) => {
+    res.status(404).json({ message: 'Route not found', status: 404 })
+});
 const listen = () => {
     logs(`Database connected at ${DB}`);
     app.listen(PORT, () => {
         logs(`App listen on port ${PORT}`);
     })
 };
-
 connect().on('error', logs).on('disconnected', connect).once('open', listen);

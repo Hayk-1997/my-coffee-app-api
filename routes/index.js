@@ -5,8 +5,19 @@ const router = Router();
 // Use Admin Routes
 const AdminRoutes = require('./admin-routes');
 // Use Coffee Routes
-const CoffeeRoutes = require('./coffee-routes');
+// const CoffeeRoutes = require('./coffee-routes');
 router.use('/admin', AdminRoutes);
-router.use('/coffee', CoffeeRoutes);
+const { graphqlHTTP } = require('express-graphql');
+const schema = require('../graphQl/schema');
+
+router.use('/coffee', graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+    playground: {
+        settings: {
+            'editor.theme': 'dark',
+        },
+    },
+}));
 
 module.exports = router;

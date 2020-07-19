@@ -126,15 +126,15 @@ class InfoController {
             Log.info('----Start InfoController get----');
             const response = await InfoModel.findOne();
             if (response._id) {
-                Log.info(`----[InfoModel.get Success]: ${JSON.stringify(response)}----`);
+                Log.info(`----[InfoModel.get Success]---- ${JSON.stringify(response)}`);
                 return successMessage(res, null, 'success', response);
             } else {
-                Log.info(`----[InfoModel.get Error]:----`);
+                Log.info(`----[InfoModel.get Error]----`);
                 return errorMessage(res);
             }
         } catch (e) {
             Log.info('----InfoController get:[Catch Error]----');
-            Log.info(`----[Error]: ${JSON.stringify(e.message)}----`);
+            Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
             return errorMessage(res, null, e.message);
         }
     }
