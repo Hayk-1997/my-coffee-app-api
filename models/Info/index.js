@@ -115,7 +115,7 @@ const InfoSchema = new Schema ({
     en: {
       ...fields,
     },
-    arm: {
+    am: {
        ...fields,
     }
 }, {

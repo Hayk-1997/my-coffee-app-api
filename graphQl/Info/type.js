@@ -2,8 +2,10 @@ module.exports = `
   type Info {
     _id: String
     en: Info!
-    arm: Info!
+    am: Info!
     phone: Info!
+    address: Info!
+    workingHours: Info!
     icon: Info!
     item: Info!
     download_url: String!
@@ -14,7 +16,5 @@ module.exports = `
     number: String
     description: String
     title: String!
-    address: [Info!]
-    workingHours: [Info!]
   }
 `;
