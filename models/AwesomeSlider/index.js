@@ -17,7 +17,7 @@ const AwesomeSliderSchema = new Schema({
             required: true,
         },
     }],
-    arm: [{
+    am: [{
         title: {
             type: String,
             required: true,
@@ -36,8 +36,7 @@ const AwesomeSliderSchema = new Schema({
 });
 
 AwesomeSliderSchema.pre('update', function (next) {
-    const Model = this;
-    Model.updated_at = new Date().getTime();
+    this.updated_at = new Date().getTime();
     next();
 });
 
