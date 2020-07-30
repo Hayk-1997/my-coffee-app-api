@@ -123,8 +123,7 @@ const InfoSchema = new Schema ({
 });
 
 InfoSchema.pre('update', function (next) {
-    const Model = this;
-    Model.updated_at = new Date().getTime();
+    this.updated_at = new Date().getTime();
     next();
 });
 

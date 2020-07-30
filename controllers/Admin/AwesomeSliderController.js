@@ -29,10 +29,11 @@ class AwesomeSliderController {
             const validationRule = {
                 "en.title": "string",
                 "en.description": "string",
-                "arm.title": "string",
-                "arm.description": "string",
+                "am.title": "string",
+                "am.description": "string",
             };
             const data = JSON.parse(req.body.form);
+
             validator(data, validationRule, {}, (err, status) => {
                 if (!status) {
                     return errorMessage(res, null, err);
@@ -43,7 +44,7 @@ class AwesomeSliderController {
             }
             const response = await AwesomeSliderModel.findOne();
             // Update Getting data
-            if (response.id) {
+            if (response._id) {
                 await AwesomeSliderModel.updateOne(data, (error, success) => {
                     if (error) {
                         return errorMessage(res);
