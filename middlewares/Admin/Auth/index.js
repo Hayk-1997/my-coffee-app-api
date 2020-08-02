@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const httpStatus = require('../../../helpers/httpStatus');
 const errorMessage = require('../../../helpers/errorMessage');
 const logs = require('../../../helpers/logs');
 const secret = process.env.JWT_SECRET || 'devmode';

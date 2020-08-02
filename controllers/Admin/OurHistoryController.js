@@ -1,39 +1,41 @@
 const mongoose = require('mongoose');
-const AwesomeSliderModel = mongoose.model('AwesomeSlider');
-const { setImagePath, getImageFullPath } = require('../../helpers/motations');
-const logs = require('../../helpers/logs');
+const OurHistoryModel = mongoose.model('OurHistory');
+const Log = require('../../helpers/winston-logger');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
+const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');
 
-class AwesomeSliderController {
-  // Get AwesomeSlider Data
+class OurHistoryController {
   async get (req, res) {
     try {
-      const response = await AwesomeSliderModel.findOne();
+      Log.info('----Start OurHistoryController get----');
+      const response = await OurHistoryModel.findOne();
       if (response._id) {
         response.image = getImageFullPath(response.image);
+        Log.info(`----[OurHistoryController.get Success]---- ${JSON.stringify(response)}`);
         return successMessage(res, null, 'success', response);
-      } else {
-        return errorMessage(res);
       }
     } catch (e) {
-      logs(`Error on AwesomeSliderController get function: [${e.message}]`);
+      Log.info('----OurHistoryController get:[Catch Error]----');
+      Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }
-  // Update Data
+
   async update (req, res) {
     try {
+      Log.info('----Start OurHistoryController update----');
       const validationRule = {
         'en.title': 'string',
+        'en.subTitle': 'string',
         'en.description': 'string',
         'am.title': 'string',
+        'am.subTitle': 'string',
         'am.description': 'string',
       };
       const data = JSON.parse(req.body.form);
-
       validator(data, validationRule, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
@@ -42,10 +44,10 @@ class AwesomeSliderController {
       if (req.file) {
         data.image = setImagePath(req.file.destination, req.file.filename);
       }
-      const response = await AwesomeSliderModel.findOne();
       // Update Getting data
+      const response = await OurHistoryModel.findOne();
       if (response._id) {
-        await AwesomeSliderModel.updateOne(data, (error, success) => {
+        await OurHistoryModel.updateOne(data, (error) => {
           if (error) {
             return errorMessage(res);
           }
@@ -58,10 +60,11 @@ class AwesomeSliderController {
         return errorMessage(res);
       }
     } catch (e) {
-      logs(`Error on AwesomeSliderController update function: [${e.message}]`);
+      Log.info('----OurHistoryController update:[Catch Error]----');
+      Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }
 }
 
-module.exports = new AwesomeSliderController();
+module.exports = new OurHistoryController();
