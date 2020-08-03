@@ -3,8 +3,8 @@
  * @param destination
  * @param filename
  */
-setImagePath = (destination, filename) => {
-    return destination.slice(2) + '/' + filename;
+const setImagePath = (destination, filename) => {
+  return destination.slice(2) + '/' + filename;
 };
 
 
@@ -12,11 +12,11 @@ setImagePath = (destination, filename) => {
  * @return {string}
  * @param image
  */
-getImageFullPath = (image) => {
-    return process.env.API_URL + '/' + image;
+const getImageFullPath = (image) => {
+  return process.env.API_URL + '/' + image;
 };
 
 module.exports = {
-    getImageFullPath,
-    setImagePath
+  getImageFullPath,
+  setImagePath
 };
