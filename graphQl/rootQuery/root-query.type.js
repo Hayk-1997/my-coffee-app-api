@@ -1,9 +1,11 @@
 const queryEntryPoints = `
   type RootQuery {
-    # get an AwesomeSlider
+    # get AwesomeSlider
     AwesomeSlider: AwesomeSlider,
-    # returns an array of Info
+    # get Info
     Info: Info,
+    # get OurHistory
+    OurHistory: OurHistory, 
   }
 `;
 

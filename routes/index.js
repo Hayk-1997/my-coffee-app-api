@@ -10,13 +10,13 @@ const { graphqlHTTP } = require('express-graphql');
 const schema = require('../graphQl/schema');
 
 router.use('/coffee', graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-    playground: {
-        settings: {
-            'editor.theme': 'dark',
-        },
+  schema: schema,
+  graphiql: true,
+  playground: {
+    settings: {
+      'editor.theme': 'dark',
     },
+  },
 }));
 
 module.exports = router;

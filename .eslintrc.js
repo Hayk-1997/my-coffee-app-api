@@ -15,13 +15,6 @@ module.exports = {
   'rules': {
     'semi': ['error', 'always'],
     'quotes': ['error', 'single'],
-    // Catch problematic imports. https://material-ui.com/guides/minimizing-bundle-size/#option-1
-    'no-restricted-imports': [
-      'error',
-      {
-        'patterns': ['@material-ui/*/*/*', '!@material-ui/core/test-utils/*']
-      }
-    ],
     'no-multi-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     'indent': ['error', 2],
