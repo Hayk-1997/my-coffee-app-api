@@ -17,11 +17,13 @@ const AdminSeeding = require('./admin-seeder');
 const AwesomeSliderSeeding = require('./awesomeSlider-seeder');
 const InfoSeeding = require('./info-seeder');
 const OurHistorySeeding = require('./ourHistory-seeder');
+const ServiceSeeding = require('./service-seeder');
 
 const Seeding = () => {
   // AdminSeeding();
   // AwesomeSliderSeeding();
   // InfoSeeding();
-  OurHistorySeeding();
+  // OurHistorySeeding();
+  ServiceSeeding();
 };
 Seeding();

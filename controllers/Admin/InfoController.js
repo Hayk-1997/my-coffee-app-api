@@ -104,7 +104,7 @@ class InfoController {
 
       const info = await InfoModel.findOne();
       if (info._id) {
-        const updatedInfo = await InfoModel.updateOne(data, (error, success) => {
+        const updatedInfo = await InfoModel.updateOne(data, (error) => {
           if (error) {
             Log.info('----InfoController update: [Error]----');
             Log.info(`----[Error]: ${JSON.stringify(error)}----`);
