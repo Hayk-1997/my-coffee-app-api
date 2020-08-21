@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 require('../models');
-const InfoModel = mongoose.model('Info');
+const ServiceModel = mongoose.model('Service');
 const logs = require('./../helpers/logs');
 
 const fields = {
-  phone: {
-    number: '094066112',
-    description: 'Phone Description',
+  box1: {
+    title: 'Box1 Title',
+    description: 'Box1 Description',
     icon: {
       item: {
         download_url: 'Download url',
@@ -17,9 +17,9 @@ const fields = {
       tags: ['Phone']
     }
   },
-  address: {
-    title: 'Yerevan Avan Duryan',
-    description: 'Address Description',
+  box2: {
+    title: 'Box2 Title',
+    description: 'Box2 Description',
     icon: {
       item: {
         download_url: 'Download url',
@@ -30,9 +30,9 @@ const fields = {
       tags: ['Phone']
     }
   },
-  workingHours: {
-    title: 'Yerevan Avan Duryan',
-    description: 'Address Description',
+  box3: {
+    title: 'Box3 Title',
+    description: 'Box3 Description',
     icon: {
       item: {
         download_url: 'Download url',
@@ -44,19 +44,16 @@ const fields = {
     }
   },
 };
+
 
 const data = {
-  en: {
-    ...fields,
-  },
-  arm: {
-    ...fields,
-  }
+  en: { ...fields },
+  am: { ...fields },
 };
 
-const InfoSeeding = () => {
+const Seeding = () => {
   return new Promise((resolve, reject) => {
-    InfoModel.create(data, (error, success) => {
+    ServiceModel.create(data, (error, success) => {
       logs(`[Seeding Error]: ${error}`);
       logs(`[Seeding Success]: ${success}`);
       if (success) {
@@ -64,7 +61,8 @@ const InfoSeeding = () => {
       } else {
         reject(error);
       }
-    });
+    });   
   });
 };
-module.exports = InfoSeeding;
+
+module.exports = Seeding;
