@@ -5,30 +5,26 @@ const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 const Log = require('../../helpers/winston-logger');
+const { iconUpdate } = require('../../helpers/ValidationRules.js');
 
 class InfoController {
   async uploadIcon(req, res) {
     try {
       Log.info('----Start InfoController uploadIcon----');
-      const validationRule = {
-        'icon.item.download_url': 'required|string',
-        'icon.item.format': 'required|string',
-        'icon.item.preview_url': 'required|string',
-        'icon.size': 'required|numeric',
-        'field': 'required|string',
-        'language': 'required|string',
-      };
       const data = req.body;
-      validator(data, validationRule, {}, (err, status) => {
+
+      validator(data, iconUpdate, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
         }
       });
+
       const __DIR__ = './public/uploads/icons/';
       const options = {
         url: data.icon.item.preview_url,
         dest: __DIR__
       };
+
       const downloadIconUrl = await download.image(options)
         .then((filename) => {
           Log.info('Download Filename: ' + JSON.stringify(filename));
@@ -38,21 +34,24 @@ class InfoController {
           Log.info('Download Error: ' + JSON.stringify(err));
           return err;
         });
+
       const infoData = await InfoModel.findOne();
       const language = data.language;
       const field = data.field;
       data.icon.item.download_url = downloadIconUrl.filename;
       infoData[language][field].icon = data.icon;
-      const updatedInfoIcon = await InfoModel.updateOne(infoData, (error, success) => {
+
+      await InfoModel.updateOne(infoData, (error, success) => {
         if (error) {
-          Log.info(`----[InfoModel.updateOne Error]: ${JSON.stringify(error)}----`);
+          Log.info(`----[InfoController updateOne Error]: ${JSON.stringify(error)}----`);
         }
-        Log.info(`----[InfoModel.updateOne Success]: ${JSON.stringify(success)}----`);
+        Log.info(`----[InfoController updateOne Success]: ${JSON.stringify(success)}----`);
       });
-      res.send({ message: updatedInfoIcon });
+
+      return successMessage(res, null, 'Icon successfully uploaded');
     } catch (e) {
-      Log.info('----InfoController uploadIcon:[Catch Error]----');
-      Log.info(`----[Error]: ${JSON.stringify(e.message)}----`);
+      Log.info(`----[InfoController uploadIcon: Error]: ${JSON.stringify(e.message)}----`);
+
       return errorMessage(res, null, e.message);
     }
   }
@@ -104,19 +103,18 @@ class InfoController {
 
       const info = await InfoModel.findOne();
       if (info._id) {
-        const updatedInfo = await InfoModel.updateOne(data, (error) => {
+        await InfoModel.updateOne(data, (error) => {
           if (error) {
-            Log.info('----InfoController update: [Error]----');
+            Log.info('----InfoController update: error----');
             Log.info(`----[Error]: ${JSON.stringify(error)}----`);
           } else {
             Log.info('----InfoController update:Success----');
           }
         });
-        res.send({ messages: updatedInfo });
+        return successMessage(res, null, 'Info successfully updated');
       }
     } catch (e) {
-      Log.info('----InfoController update:[Catch Error]----');
-      Log.info(`----[Error]: ${JSON.stringify(e.message)}----`);
+      Log.info(`----[InfoController update: Error]: ${JSON.stringify(e.message)}----`);
       return errorMessage(res, null, e.message);
     }
   }
@@ -126,15 +124,14 @@ class InfoController {
       Log.info('----Start InfoController get----');
       const response = await InfoModel.findOne();
       if (response._id) {
-        Log.info(`----[InfoController.get Success]---- ${JSON.stringify(response)}`);
+        Log.info(`----[InfoController get Success]---- ${JSON.stringify(response)}`);
         return successMessage(res, null, 'success', response);
       } else {
-        Log.info('----[InfoController.get Error]----');
+        Log.info('----[InfoController get Error]----');
         return errorMessage(res);
       }
     } catch (e) {
-      Log.info('----InfoController get:[Catch Error]----');
-      Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
+      Log.info(`----[InfoController get: Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }
