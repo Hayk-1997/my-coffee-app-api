@@ -5,7 +5,7 @@ const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 const Log = require('../../helpers/winston-logger');
-const { iconUpdate } = require('../../helpers/ValidationRules.js');
+const { iconUpdateValidation } = require('../../helpers/ValidationRules.js');
 
 class ServicesController {
   async get (req, res) {
@@ -52,7 +52,7 @@ class ServicesController {
       Log.info('----Start ServicesController uploadIcon----');
       const data = req.body;
 
-      validator(data, iconUpdate, {}, (err, status) => {
+      validator(data, iconUpdateValidation, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
         }

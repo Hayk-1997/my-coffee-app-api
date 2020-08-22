@@ -6,7 +6,7 @@ const successMessage = require('../../helpers/successMessage');
 const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');
-const { ourHistoryUpdate } = require('../../helpers/ValidationRules.js');
+const { ourHistoryUpdateValidation } = require('../../helpers/ValidationRules.js');
 
 class OurHistoryController {
   async get (req, res) {
@@ -28,7 +28,7 @@ class OurHistoryController {
     try {
       Log.info('----Start OurHistoryController update----');
       const data = JSON.parse(req.body.form);
-      validator(data, ourHistoryUpdate, {}, (err, status) => {
+      validator(data, ourHistoryUpdateValidation, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
         }

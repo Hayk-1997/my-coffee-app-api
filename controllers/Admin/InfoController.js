@@ -5,7 +5,7 @@ const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 const Log = require('../../helpers/winston-logger');
-const { iconUpdate } = require('../../helpers/ValidationRules.js');
+const { iconUpdateValidation, infoValidation } = require('../../helpers/ValidationRules.js');
 
 class InfoController {
   async uploadIcon(req, res) {
@@ -13,7 +13,7 @@ class InfoController {
       Log.info('----Start InfoController uploadIcon----');
       const data = req.body;
 
-      validator(data, iconUpdate, {}, (err, status) => {
+      validator(data, iconUpdateValidation, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
         }
@@ -59,45 +59,9 @@ class InfoController {
   async update(req, res) {
     try {
       Log.info('----Start InfoController update----');
-      const validationRule = {
-        'en.phone.number': 'required|string',
-        'en.phone.description': 'required|string',
-        'en.phone.icon.item.download_url': 'required|string',
-        'en.phone.icon.item.format': 'required|string',
-        'en.phone.icon.item.preview_url': 'required|string',
-        'en.phone.icon.size': 'required|numeric',
-        'en.address.title': 'required|string',
-        'en.address.description': 'required|string',
-        'en.address.icon.item.format': 'required|string',
-        'en.address.icon.item.preview_url': 'required|string',
-        'en.address.icon.size': 'required|numeric',
-        'en.workingHours.title': 'required|string',
-        'en.workingHours.description': 'required|string',
-        'en.workingHours.icon.item.format': 'required|string',
-        'en.workingHours.icon.item.preview_url': 'required|string',
-        'en.workingHours.icon.size': 'required|numeric',
-        'am.phone.number': 'required|string',
-        'am.phone.description': 'required|string',
-        'am.phone.icon.item.download_url': 'required|string',
-        'am.phone.icon.item.format': 'required|string',
-        'am.phone.icon.item.preview_url': 'required|string',
-        'am.phone.icon.size': 'required|numeric',
-        'am.address.title': 'required|string',
-        'am.address.description': 'required|string',
-        'am.address.icon.item.download_url': 'required|string',
-        'am.address.icon.item.format': 'required|string',
-        'am.address.icon.item.preview_url': 'required|string',
-        'am.address.icon.size': 'required|numeric',
-        'am.workingHours.title': 'required|string',
-        'am.workingHours.description': 'required|string',
-        'am.workingHours.icon.item.download_url': 'required|string',
-        'am.workingHours.icon.item.format': 'required|string',
-        'am.workingHours.icon.item.preview_url': 'required|string',
-        'am.workingHours.icon.size': 'required|numeric',
-      };
-
       const data = req.body;
-      validator(data, validationRule, {}, (error, success) => {
+
+      validator(data, infoValidation, {}, (error, success) => {
         if (!success) { return errorMessage(res, null, error); }
       });
 
