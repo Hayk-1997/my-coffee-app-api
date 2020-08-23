@@ -2,6 +2,7 @@ const { makeExecutableSchema } = require('graphql-tools');
 const AwesomeSliderType = require('../AwesomeSlider/type');
 const InfoType = require('../Info/type');
 const OurHistoryType = require('../OurHistory/type');
+const ServicesType = require('../Services/type');
 const RootQuery = require('../rootQuery/root-query.type');
 const resolvers = require('../resolvers');
 
@@ -18,7 +19,8 @@ const schema = makeExecutableSchema({
     RootQuery,
     AwesomeSliderType,
     InfoType,
-    OurHistoryType
+    OurHistoryType,
+    ServicesType
   ],
   // performs field lookups for a specific type
   resolvers

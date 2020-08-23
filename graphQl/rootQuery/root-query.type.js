@@ -6,6 +6,8 @@ const queryEntryPoints = `
     Info: Info,
     # get OurHistory
     OurHistory: OurHistory, 
+    # get Services
+    Services: Services,
   }
 `;
 
