@@ -86,7 +86,6 @@ class ServicesController {
         }
         Log.info(`----[ServicesController updateOne Success]: ${JSON.stringify(success)}----`);
       });
-
       return successMessage(res, null, 'Icon successfully uploaded');
     } catch (e) {
       Log.info(`----[ServicesController uploadIcon: Error]: ${JSON.stringify(e.message)}----`);
