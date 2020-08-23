@@ -15,7 +15,7 @@ module.exports = {
     'am.subTitle': 'string',
     'am.description': 'string',
   },
-  'infoValidation': {
+  'infoUpdateValidation': {
     'en.phone.number': 'required|string',
     'en.phone.description': 'required|string',
     'en.phone.icon.item.download_url': 'required|string',

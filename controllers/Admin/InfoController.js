@@ -5,7 +5,7 @@ const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 const Log = require('../../helpers/winston-logger');
-const { iconUpdateValidation, infoValidation } = require('../../helpers/ValidationRules.js');
+const { iconUpdateValidation, infoUpdateValidation } = require('../../helpers/ValidationRules.js');
 
 class InfoController {
   async uploadIcon(req, res) {
@@ -61,7 +61,7 @@ class InfoController {
       Log.info('----Start InfoController update----');
       const data = req.body;
 
-      validator(data, infoValidation, {}, (error, success) => {
+      validator(data, infoUpdateValidation, {}, (error, success) => {
         if (!success) { return errorMessage(res, null, error); }
       });
 
