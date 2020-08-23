@@ -21,5 +21,7 @@ router.put('/info/upload-icon', AdminAuthMiddleware, InfoController.uploadIcon);
 router.get('/our-history', AdminAuthMiddleware, OurHistoryController.get);
 router.put('/our-history', AdminAuthMiddleware, upload.single('image'), OurHistoryController.update);
 router.get('/services', AdminAuthMiddleware, ServicesController.get);
+router.put('/services', AdminAuthMiddleware, ServicesController.update);
+router.put('/services/upload-icon', AdminAuthMiddleware, ServicesController.uploadIcon);
 
 module.exports = router;

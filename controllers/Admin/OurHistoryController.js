@@ -6,6 +6,7 @@ const successMessage = require('../../helpers/successMessage');
 const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');
+const { ourHistoryUpdateValidation } = require('../../helpers/ValidationRules.js');
 
 class OurHistoryController {
   async get (req, res) {
@@ -14,12 +15,11 @@ class OurHistoryController {
       const response = await OurHistoryModel.findOne();
       if (response._id) {
         response.image = getImageFullPath(response.image);
-        Log.info(`----[OurHistoryController.get Success]---- ${JSON.stringify(response)}`);
+        Log.info(`----[OurHistoryController get Success]---- ${JSON.stringify(response)}`);
         return successMessage(res, null, 'success', response);
       }
     } catch (e) {
-      Log.info('----OurHistoryController get:[Catch Error]----');
-      Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
+      Log.info(`----[OurHistoryController get: Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }
@@ -27,16 +27,8 @@ class OurHistoryController {
   async update (req, res) {
     try {
       Log.info('----Start OurHistoryController update----');
-      const validationRule = {
-        'en.title': 'string',
-        'en.subTitle': 'string',
-        'en.description': 'string',
-        'am.title': 'string',
-        'am.subTitle': 'string',
-        'am.description': 'string',
-      };
       const data = JSON.parse(req.body.form);
-      validator(data, validationRule, {}, (err, status) => {
+      validator(data, ourHistoryUpdateValidation, {}, (err, status) => {
         if (!status) {
           return errorMessage(res, null, err);
         }
@@ -54,14 +46,13 @@ class OurHistoryController {
           if (fs.existsSync(response.image) && response.id && req.file) {
             fs.unlinkSync(response.image);
           }
-          return successMessage(res, null, 'Data updated successfully');
+          return successMessage(res, null, 'Our History updated successfully');
         });
       } else {
         return errorMessage(res);
       }
     } catch (e) {
-      Log.info('----OurHistoryController update:[Catch Error]----');
-      Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
+      Log.info(`----[OurHistoryController update: Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }

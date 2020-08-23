@@ -51,7 +51,7 @@ const data = {
   am: { ...fields },
 };
 
-const Seeding = () => {
+const ServicesSeeding = () => {
   return new Promise((resolve, reject) => {
     ServiceModel.create(data, (error, success) => {
       logs(`[Seeding Error]: ${error}`);
@@ -65,4 +65,4 @@ const Seeding = () => {
   });
 };
 
-module.exports = Seeding;
+module.exports = ServicesSeeding;

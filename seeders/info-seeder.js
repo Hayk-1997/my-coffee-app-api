@@ -46,12 +46,8 @@ const fields = {
 };
 
 const data = {
-  en: {
-    ...fields,
-  },
-  arm: {
-    ...fields,
-  }
+  en: { ...fields },
+  arm: { ...fields },
 };
 
 const InfoSeeding = () => {
