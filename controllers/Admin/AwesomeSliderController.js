@@ -6,9 +6,10 @@ const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');
+const { ourHistoryUpdateValidation } = require('../../helpers/ValidationRules.js');
+const Log = require('../../helpers/winston-logger');
 
 class AwesomeSliderController {
-  // Get AwesomeSlider Data
   async get (req, res) {
     try {
       const response = await AwesomeSliderModel.findOne();
@@ -23,42 +24,36 @@ class AwesomeSliderController {
       return errorMessage(res, null, e.message);
     }
   }
-  // Update Data
+
   async update (req, res) {
     try {
-      const validationRule = {
-        'en.title': 'string',
-        'en.description': 'string',
-        'am.title': 'string',
-        'am.description': 'string',
-      };
+      Log.info('----Start AwesomeSliderController update----');
       const data = JSON.parse(req.body.form);
-
-      validator(data, validationRule, {}, (err, status) => {
+      validator(data, ourHistoryUpdateValidation, {}, (error) => {
         if (!status) {
-          return errorMessage(res, null, err);
+          return errorMessage(res, null, error);
         }
       });
       if (req.file) {
         data.image = setImagePath(req.file.destination, req.file.filename);
       }
+
       const response = await AwesomeSliderModel.findOne();
-      // Update Getting data
       if (response._id) {
-        await AwesomeSliderModel.updateOne(data, (error, success) => {
+        await AwesomeSliderModel.updateOne(data, (error) => {
           if (error) {
             return errorMessage(res);
           }
           if (fs.existsSync(response.image) && response.id && req.file) {
             fs.unlinkSync(response.image);
           }
-          return successMessage(res, null, 'Data updated successfully');
+          return successMessage(res, null, 'Awesome Slider successfully updated');
         });
       } else {
         return errorMessage(res);
       }
     } catch (e) {
-      logs(`Error on AwesomeSliderController update function: [${e.message}]`);
+      Log.info(`----[AwesomeSliderController update: Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
     }
   }

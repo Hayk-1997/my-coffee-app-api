@@ -9,7 +9,7 @@ module.exports = function auth(req, res, next) {
     const decodedToken = jwt.verify(token, secret);
     const userId = decodedToken.userId;
     if (req.body.userId && req.body.userId !== userId) {
-      return errorMessage(res, null, e.message);
+      return errorMessage(res, null, 'User is not valid');
     } else {
       next();
     }

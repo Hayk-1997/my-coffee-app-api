@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const InfoModel = mongoose.model('Info');
+const Info = mongoose.model('Info');
 const download = require('image-downloader');
 const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
@@ -35,13 +35,13 @@ class InfoController {
           return err;
         });
 
-      const infoData = await InfoModel.findOne();
+      const infoData = await Info.findOne();
       const language = data.language;
       const field = data.field;
       data.icon.item.download_url = downloadIconUrl.filename;
       infoData[language][field].icon = data.icon;
 
-      await InfoModel.updateOne(infoData, (error, success) => {
+      await Info.updateOne(infoData, (error, success) => {
         if (error) {
           Log.info(`----[InfoController updateOne Error]: ${JSON.stringify(error)}----`);
         }
@@ -60,23 +60,15 @@ class InfoController {
     try {
       Log.info('----Start InfoController update----');
       const data = req.body;
-
       validator(data, infoUpdateValidation, {}, (error, success) => {
         if (!success) { return errorMessage(res, null, error); }
       });
-
-      const info = await InfoModel.findOne();
-      if (info._id) {
-        await InfoModel.updateOne(data, (error) => {
-          if (error) {
-            Log.info('----InfoController update: error----');
-            Log.info(`----[Error]: ${JSON.stringify(error)}----`);
-          } else {
-            Log.info('----InfoController update:Success----');
-          }
-        });
+      await Info.updateOne(data, (error) => {
+        if (error) {
+          return errorMessage(res);
+        }
         return successMessage(res, null, 'Info successfully updated');
-      }
+      });
     } catch (e) {
       Log.info(`----[InfoController update: Error]: ${JSON.stringify(e.message)}----`);
       return errorMessage(res, null, e.message);
@@ -86,7 +78,7 @@ class InfoController {
   async get(req, res) {
     try {
       Log.info('----Start InfoController get----');
-      const response = await InfoModel.findOne();
+      const response = await Info.findOne();
       if (response._id) {
         Log.info(`----[InfoController get Success]---- ${JSON.stringify(response)}`);
         return successMessage(res, null, 'success', response);

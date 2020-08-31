@@ -112,12 +112,8 @@ const InfoSchema = new Schema ({
     type: String,
     default: () => Guid.raw(),
   },
-  en: {
-    ...fields,
-  },
-  am: {
-    ...fields,
-  }
+  en: { ...fields },
+  am: { ...fields }
 }, {
   timestamp: true,
 });
