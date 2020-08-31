@@ -50,5 +50,11 @@ module.exports = {
     'am.workingHours.icon.item.format': 'required|string',
     'am.workingHours.icon.item.preview_url': 'required|string',
     'am.workingHours.icon.size': 'required|numeric',
+  },
+  'awesomeSliderUpdateValidation': {
+    'en.title': 'string',
+    'en.description': 'string',
+    'am.title': 'string',
+    'am.description': 'string',
   }
 };

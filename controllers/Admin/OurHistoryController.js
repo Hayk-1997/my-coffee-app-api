@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const OurHistoryModel = mongoose.model('OurHistory');
+const OurHistory = mongoose.model('OurHistory');
 const Log = require('../../helpers/winston-logger');
 const errorMessage = require('../../helpers/errorMessage');
 const successMessage = require('../../helpers/successMessage');
@@ -12,7 +12,7 @@ class OurHistoryController {
   async get (req, res) {
     try {
       Log.info('----Start OurHistoryController get----');
-      const response = await OurHistoryModel.findOne();
+      const response = await OurHistory.findOne();
       if (response._id) {
         response.image = getImageFullPath(response.image);
         Log.info(`----[OurHistoryController get Success]---- ${JSON.stringify(response)}`);
@@ -36,21 +36,16 @@ class OurHistoryController {
       if (req.file) {
         data.image = setImagePath(req.file.destination, req.file.filename);
       }
-      // Update Getting data
-      const response = await OurHistoryModel.findOne();
-      if (response._id) {
-        await OurHistoryModel.updateOne(data, (error) => {
-          if (error) {
-            return errorMessage(res);
-          }
-          if (fs.existsSync(response.image) && response.id && req.file) {
-            fs.unlinkSync(response.image);
-          }
-          return successMessage(res, null, 'Our History updated successfully');
-        });
-      } else {
-        return errorMessage(res);
-      }
+      const response = await OurHistory.findOne();
+      await OurHistory.updateOne(data, (error) => {
+        if (error) {
+          return errorMessage(res);
+        }
+        if (fs.existsSync(response.image) && response.id && req.file) {
+          fs.unlinkSync(response.image);
+        }
+        return successMessage(res, null, 'Our History successfully updated');
+      });
     } catch (e) {
       Log.info(`----[OurHistoryController update: Error]----: ${JSON.stringify(e.message)}`);
       return errorMessage(res, null, e.message);
