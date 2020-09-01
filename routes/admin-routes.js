@@ -6,7 +6,7 @@ const AdminAuthMiddleware = require('../middlewares/Admin/Auth');
 const AuthController = require('../controllers/Admin/AuthController');
 const AwesomeSliderController = require('../controllers/Admin/AwesomeSliderController');
 const InfoController = require('../controllers/Admin/InfoController');
-const OurHistoryController = require('../controllers/Admin/OurHistoryController');
+const OurStoryController = require('../controllers/Admin/OurStoryController');
 const ServicesController = require('../controllers/Admin/ServicesController');
 const OurMenuController = require('../controllers/Admin/OurMenuController');
 // Admin Routes
@@ -18,8 +18,8 @@ router.put('/awesome-slider', AdminAuthMiddleware, upload.single('image'), Aweso
 router.get('/info', AdminAuthMiddleware, InfoController.get);
 router.put('/info-update', AdminAuthMiddleware, InfoController.update);
 router.put('/info/upload-icon', AdminAuthMiddleware, InfoController.uploadIcon);
-router.get('/our-history', AdminAuthMiddleware, OurHistoryController.get);
-router.put('/our-history', AdminAuthMiddleware, upload.single('image'), OurHistoryController.update);
+router.get('/our-story', AdminAuthMiddleware, OurStoryController.get);
+router.put('/our-story', AdminAuthMiddleware, upload.single('image'), OurStoryController.update);
 router.get('/services', AdminAuthMiddleware, ServicesController.get);
 router.put('/services', AdminAuthMiddleware, ServicesController.update);
 router.put('/services/upload-icon', AdminAuthMiddleware, ServicesController.uploadIcon);

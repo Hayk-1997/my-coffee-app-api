@@ -17,7 +17,7 @@ const fields = {
   },
 };
 
-const OurHistorySchema = new Schema ({
+const OurStorySchema = new Schema ({
   _id: {
     type: String,
     default: () => Guid.raw(),
@@ -36,9 +36,9 @@ const OurHistorySchema = new Schema ({
   timestamps: true,
 });
 
-OurHistorySchema.pre('update', function (next) {
+OurStorySchema.pre('update', function (next) {
   this.updated_at = new Date().getTime();
   next();
 });
 
-module.exports = model('OurHistory', OurHistorySchema);
+module.exports = model('OurStory', OurStorySchema);

@@ -5,7 +5,7 @@ const queryEntryPoints = `
     # get Info
     Info: Info,
     # get OurHistory
-    OurHistory: OurHistory, 
+    OurStory: OurStory, 
     # get Services
     Services: Services,
     # get OurMenu

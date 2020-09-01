@@ -1,15 +1,15 @@
-const AuthModel = require('./Admin/Auth');
-const AwesomeSliderModel = require('./AwesomeSlider');
+const Auth = require('./Admin/Auth');
+const AwesomeSlider = require('./AwesomeSlider');
 const InfoModel = require('./Info');
-const OurHistoryModel = require('./OurHistory');
-const ServiceModel = require('./Service');
+const OurStory = require('./OurStory');
+const Service = require('./Service');
 const OurMenu = require('./OurMenu');
 
 module.exports = {
-  AuthModel,
-  AwesomeSliderModel,
+  Auth,
+  AwesomeSlider,
   InfoModel,
-  OurHistoryModel,
-  ServiceModel,
+  OurStory,
+  Service,
   OurMenu,
 };

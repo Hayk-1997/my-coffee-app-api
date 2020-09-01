@@ -1,7 +1,7 @@
 module.exports = `
-  type OurHistory {
-    en: OurHistory!
-    am: OurHistory!
+  type OurStory {
+    en: OurStory!
+    am: OurStory!
     image: String!
     title: String!
     subTitle: String!

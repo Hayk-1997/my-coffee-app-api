@@ -1,7 +1,7 @@
 const { makeExecutableSchema } = require('graphql-tools');
 const AwesomeSliderType = require('../AwesomeSlider/type');
 const InfoType = require('../Info/type');
-const OurHistoryType = require('../OurHistory/type');
+const OurStoryType = require('../OurStory/type');
 const ServicesType = require('../Services/type');
 const OurMenuType = require('../OurMenu/type');
 
@@ -21,7 +21,7 @@ const schema = makeExecutableSchema({
     RootQuery,
     AwesomeSliderType,
     InfoType,
-    OurHistoryType,
+    OurStoryType,
     ServicesType,
     OurMenuType,
   ],

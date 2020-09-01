@@ -16,7 +16,7 @@ connect().on('error', logs).on('disconnected', connect).once('open', listen);
 const AdminSeeding = require('./admin-seeder');
 const AwesomeSliderSeeding = require('./awesomeSlider-seeder');
 const InfoSeeding = require('./info-seeder');
-const OurHistorySeeding = require('./ourHistory-seeder');
+const OurStorySeeding = require('./ourStory-seeder');
 const ServiceSeeding = require('./service-seeder');
 const OurMenuSeeding = require('./ourMenu-seeder');
 
@@ -25,8 +25,8 @@ const Seeding = () => {
   // AdminSeeding();
   // AwesomeSliderSeeding();
   // InfoSeeding();
-  // OurHistorySeeding();
+  OurStorySeeding();
   // ServiceSeeding();
-  OurMenuSeeding();
+  // OurMenuSeeding();
 };
 Seeding();
