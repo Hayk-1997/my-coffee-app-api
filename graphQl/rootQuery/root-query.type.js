@@ -8,6 +8,8 @@ const queryEntryPoints = `
     OurHistory: OurHistory, 
     # get Services
     Services: Services,
+    # get OurMenu
+    OurMenu: OurMenu,
   }
 `;
 

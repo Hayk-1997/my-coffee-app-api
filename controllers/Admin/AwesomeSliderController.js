@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const AwesomeSliderModel = mongoose.model('AwesomeSlider');
+const AwesomeSlider = mongoose.model('AwesomeSlider');
 const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const logs = require('../../helpers/logs');
 const errorMessage = require('../../helpers/errorMessage');
@@ -12,7 +12,7 @@ const Log = require('../../helpers/winston-logger');
 class AwesomeSliderController {
   async get (req, res) {
     try {
-      const response = await AwesomeSliderModel.findOne();
+      const response = await AwesomeSlider.findOne();
       if (response._id) {
         response.image = getImageFullPath(response.image);
         return successMessage(res, null, 'success', response);
@@ -38,9 +38,9 @@ class AwesomeSliderController {
         data.image = setImagePath(req.file.destination, req.file.filename);
       }
 
-      const response = await AwesomeSliderModel.findOne();
+      const response = await AwesomeSlider.findOne();
       if (response._id) {
-        await AwesomeSliderModel.updateOne(data, (error) => {
+        await AwesomeSlider.updateOne(data, (error) => {
           if (error) {
             return errorMessage(res);
           }
