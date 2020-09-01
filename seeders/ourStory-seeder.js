@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('../models');
-const OurHistoryModel = mongoose.model('OurHistory');
+const OurStory = mongoose.model('OurStory');
 const logs = require('./../helpers/logs');
 
 const data = {
@@ -17,9 +17,9 @@ const data = {
   image: 'https://images.unsplash.com/photo-1593346134815-68592a081b93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80',
 };
 
-const OurHistorySeeding = () => {
+const OurStorySeeding = () => {
   return new Promise((resolve, reject) => {
-    OurHistoryModel.create(data, (error, success) => {
+    OurStory.create(data, (error, success) => {
       logs(`[Seeding Error]: ${error}`);
       logs(`[Seeding Success]: ${success}`);
       if (success) {
@@ -31,4 +31,4 @@ const OurHistorySeeding = () => {
   });
 };
 
-module.exports = OurHistorySeeding;
+module.exports = OurStorySeeding;

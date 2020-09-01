@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
-const OurHistoryModel = mongoose.model('OurHistory');
+const OurStory = mongoose.model('OurStory');
 const Log = require('../../helpers/winston-logger');
 const { getImageFullPath } = require('../../helpers/motations');
 
-class OurHistoryController {
+class OurStoryController {
   async get () {
     try {
-      Log.info('----Start OurHistoryController get----');
-      const response = await OurHistoryModel.findOne();
+      Log.info('----Start OurStoryController get----');
+      const response = await OurStory.findOne();
       if (response._id) {
         response.image = getImageFullPath(response.image);
-        Log.info(`----[OurHistoryController.get Success]---- ${JSON.stringify(response)}`);
+        Log.info(`----[OurStoryController.get Success]---- ${JSON.stringify(response)}`);
         return { ...response._doc };
       }
     } catch (e) {
-      Log.info('----OurHistoryController get:[Catch Error]----');
+      Log.info('----OurStoryController get:[Catch Error]----');
       Log.info(`----[Error]----: ${JSON.stringify(e.message)}`);
       return { ...e.message };
     }
   }
 }
 
-module.exports = new OurHistoryController();
+module.exports = new OurStoryController();
