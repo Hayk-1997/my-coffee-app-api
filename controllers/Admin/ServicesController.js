@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ServiceModel = mongoose.model('Service');
+const Service = mongoose.model('Service');
 const download = require('image-downloader');
 const validator = require('../../helpers/validate');
 const errorMessage = require('../../helpers/errorMessage');
@@ -11,7 +11,7 @@ class ServicesController {
   async get (req, res) {
     try {
       Log.info('----Start ServicesController get----');
-      const response = await ServiceModel.findOne();
+      const response = await Service.findOne();
       if (response._id) {
         Log.info(`----[ServicesController get Success]---- ${JSON.stringify(response)}`);
         return successMessage(res, null, 'success', response);
@@ -29,9 +29,9 @@ class ServicesController {
     try {
       Log.info('----Start ServicesController update----');
       const data = req.body;
-      const services = await ServiceModel.findOne();
+      const services = await Service.findOne();
       if (services._id) {
-        await ServiceModel.updateOne(data, (error) => {
+        await Service.updateOne(data, (error) => {
           if (error) {
             Log.info('----ServicesController update:error----');
             Log.info(`----[Error]: ${JSON.stringify(error)}----`);
@@ -74,13 +74,13 @@ class ServicesController {
           return err;
         });
 
-      const services = await ServiceModel.findOne();
+      const services = await Service.findOne();
       const language = data.language;
       const field = data.field;
       data.icon.item.download_url = downloadIconUrl.filename;
       services[language][field].icon = data.icon;
 
-      await ServiceModel.updateOne(services, (error, success) => {
+      await Service.updateOne(services, (error, success) => {
         if (error) {
           Log.info(`----[ServicesController updateOne Error]: ${JSON.stringify(error)}----`);
         }

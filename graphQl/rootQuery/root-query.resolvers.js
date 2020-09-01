@@ -2,6 +2,7 @@ const AwesomeSliderController = require('../../controllers/Coffee/AwesomeSliderC
 const InfoController = require('../../controllers/Coffee/InfoController');
 const OurHistoryController = require('../../controllers/Coffee/OurHistoryController');
 const ServicesController = require('../../controllers/Coffee/ServicesController');
+const OurMenuController = require('../../controllers/Coffee/OurMenuController');
 // must match the field items in RootQuery
 const rootQueryResolvers = {
   async AwesomeSlider () {
@@ -15,6 +16,9 @@ const rootQueryResolvers = {
   },
   async Services() {
     return await ServicesController.get();
+  },
+  async OurMenu() {
+    return await OurMenuController.get();
   }
 };
 
