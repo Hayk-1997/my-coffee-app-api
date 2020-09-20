@@ -19,14 +19,16 @@ const InfoSeeding = require('./info-seeder');
 const OurStorySeeding = require('./ourStory-seeder');
 const ServiceSeeding = require('./service-seeder');
 const OurMenuSeeding = require('./ourMenu-seeder');
+const StaticCounterSeeding = require('./staticCounter-seeder');
 
 
 const Seeding = () => {
   // AdminSeeding();
   // AwesomeSliderSeeding();
   // InfoSeeding();
-  OurStorySeeding();
+  // OurStorySeeding();
   // ServiceSeeding();
   // OurMenuSeeding();
+  StaticCounterSeeding();
 };
 Seeding();

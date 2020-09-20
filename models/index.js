@@ -4,6 +4,7 @@ const InfoModel = require('./Info');
 const OurStory = require('./OurStory');
 const Service = require('./Service');
 const OurMenu = require('./OurMenu');
+const StaticCounter = require('./StaticCounter');
 
 module.exports = {
   Auth,
@@ -12,4 +13,5 @@ module.exports = {
   OurStory,
   Service,
   OurMenu,
+  StaticCounter,
 };
