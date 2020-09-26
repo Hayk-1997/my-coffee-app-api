@@ -17,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Handle Routes
 const routes = require('./routes');
-app.use(routes);
+app.use('/api/v1', routes);
 //
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/api/v1/public', express.static(path.join(__dirname, 'public')));
 // Start run environment
 require('dotenv').config();
 const PORT = process.env.PORT || 3100;

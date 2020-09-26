@@ -42,9 +42,4 @@ const OurMenuSchema = new Schema({
   timestamp: true,
 });
 
-OurMenuSchema.pre('update', function (next) {
-  this.updated_at = new Date().getTime();
-  next();
-});
-
 module.exports = model('OurMenu', OurMenuSchema);

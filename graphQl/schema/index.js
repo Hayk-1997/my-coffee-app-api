@@ -4,7 +4,7 @@ const InfoType = require('../Info/type');
 const OurStoryType = require('../OurStory/type');
 const ServicesType = require('../Services/type');
 const OurMenuType = require('../OurMenu/type');
-
+const StaticCounterType = require('../StaticCounter/type');
 const RootQuery = require('../rootQuery/root-query.type');
 const resolvers = require('../resolvers');
 
@@ -24,6 +24,7 @@ const schema = makeExecutableSchema({
     OurStoryType,
     ServicesType,
     OurMenuType,
+    StaticCounterType,
   ],
   // performs field lookups for a specific type
   resolvers

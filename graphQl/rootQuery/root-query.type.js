@@ -10,6 +10,8 @@ const queryEntryPoints = `
     Services: Services,
     # get OurMenu
     OurMenu: OurMenu,
+    # get StaticCounter
+    StaticCounter: StaticCounter
   }
 `;
 
