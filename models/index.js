@@ -5,6 +5,8 @@ const OurStory = require('./OurStory');
 const Service = require('./Service');
 const OurMenu = require('./OurMenu');
 const StaticCounter = require('./StaticCounter');
+const Category = require('./Category');
+const Product = require('./Product');
 
 module.exports = {
   Auth,
@@ -14,4 +16,6 @@ module.exports = {
   Service,
   OurMenu,
   StaticCounter,
+  Category,
+  Product,
 };

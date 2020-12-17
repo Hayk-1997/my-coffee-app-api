@@ -10,6 +10,7 @@ const OurStoryController = require('../controllers/Admin/OurStoryController');
 const ServicesController = require('../controllers/Admin/ServicesController');
 const OurMenuController = require('../controllers/Admin/OurMenuController');
 const StaticCounterController = require('../controllers/Admin/StaticCounterController');
+const CategoryController = require('../controllers/Admin/CategoryController');
 // Admin Routes
 router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
@@ -28,5 +29,6 @@ router.get('/our-menu', AdminAuthMiddleware, OurMenuController.get);
 router.put('/our-menu', AdminAuthMiddleware, OurMenuController.update);
 router.put('/our-menu-image', AdminAuthMiddleware, upload.single('image'), OurMenuController.uploadImage);
 router.get('/static-counter', AdminAuthMiddleware, StaticCounterController.get);
+router.get('/all-categories', AdminAuthMiddleware, CategoryController.get);
 
 module.exports = router;
