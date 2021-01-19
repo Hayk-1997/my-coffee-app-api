@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const OurMenu = mongoose.model('OurMenu');
 const Log = require('../../helpers/winston-logger');
-const errorMessage = require('../../helpers/errorMessage');
-const successMessage = require('../../helpers/successMessage');
+const { errorMessage } = require('../../helpers/handleMessage');
+const { successMessage } = require('../../helpers/handleMessage');
 const { setImagePath } = require('../../helpers/motations');
 const fs = require('fs-extra');
 

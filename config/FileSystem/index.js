@@ -6,7 +6,8 @@ const DIR = './public/uploads/';
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (['png', 'jpg', 'jpeg'].some((suffix) => suffix.endsWith(file.mimetype.split('/')[1]))) {
-      const path = DIR + req.url.substring(1);
+      const direction = req.url.substring(1).split('/').length > 0 ? req.url.substring(1).split('/')[0] : req.url.substring(1).split('/');
+      const path = DIR + direction;
       fs.mkdirsSync(path);
       cb(null, path);
     }

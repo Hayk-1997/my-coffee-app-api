@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Service = mongoose.model('Service');
 const download = require('image-downloader');
 const validator = require('../../helpers/validate');
-const errorMessage = require('../../helpers/errorMessage');
-const successMessage = require('../../helpers/successMessage');
+const { errorMessage } = require('../../helpers/handleMessage');
+const { successMessage } = require('../../helpers/handleMessage');
 const Log = require('../../helpers/winston-logger');
 const { iconUpdateValidation } = require('../../helpers/ValidationRules.js');
 
