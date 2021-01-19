@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const StaticCounter = mongoose.model('StaticCounter');
 const Log = require('../../helpers/winston-logger');
-const errorMessage = require('../../helpers/errorMessage');
-const successMessage = require('../../helpers/successMessage');
+const { errorMessage } = require('../../helpers/handleMessage');
+const { successMessage } = require('../../helpers/handleMessage');
 
 class StaticCounterController {
   async get (req, res) {

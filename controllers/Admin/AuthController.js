@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Admin = mongoose.model('Admin');
-const secret = process.env.JWT_SECRET || 'devmode';
+require('dotenv').config();
+const secret = process.env.JWT_SECRET;
 const httpStatus = require('../../helpers/httpStatus');
 const logs = require('../../helpers/logs');
 const jwt = require('jsonwebtoken');

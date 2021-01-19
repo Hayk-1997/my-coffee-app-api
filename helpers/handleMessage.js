@@ -7,4 +7,15 @@ const errorMessage = (res, status = null, message = null) => {
   });
 };
 
-module.exports = errorMessage;
+const successMessage = (res, status = null, message = null, data = {}) => {
+  return res.status(status || httpStatus.OK).json({
+    status: status || httpStatus.OK,
+    message: message,
+    data: data,
+  });
+};
+
+module.exports = {
+  errorMessage,
+  successMessage
+};

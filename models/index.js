@@ -1,4 +1,4 @@
-const Auth = require('./Admin/Auth');
+const Admin = require('./Admin/Auth');
 const AwesomeSlider = require('./AwesomeSlider');
 const InfoModel = require('./Info');
 const OurStory = require('./OurStory');
@@ -9,7 +9,7 @@ const Category = require('./Category');
 const Product = require('./Product');
 
 module.exports = {
-  Auth,
+  Admin,
   AwesomeSlider,
   InfoModel,
   OurStory,

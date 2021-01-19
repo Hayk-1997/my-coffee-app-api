@@ -3,6 +3,7 @@ const {
   transports,
   format
 } = require('winston');
+require('dotenv').config();
 
 require('winston-mongodb');
 const __DIR__ = './storage/';
@@ -15,13 +16,14 @@ const logger = createLogger({
       format: format.combine(format.timestamp(), format.json()),
     }),
     // new transports.MongoDB({
-    //     level: 'error',
-    //     db: process.env.MONGO_URI,
-    //     options: {
-    //         useUnifiedTopology: true
-    //     },
-    //     collection: 'babaji',
-    //     format: format.combine(format.timestamp(), format.json())
+    //   filename: __DIR__ + 'Error' + date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear() +'-info.log',
+    //   level: 'error',
+    //   db: process.env.MONGO_URI,
+    //   options: {
+    //     useUnifiedTopology: true
+    //   },
+    //   collection: 'test',
+    //   format: format.combine(format.timestamp(), format.json())
     // })
   ]
 });

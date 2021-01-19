@@ -1,34 +1,39 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
-const Guid = require('guid');
 
-const ProductSchema = new Schema({
-  _id: {
+const fields = {
+  title: {
     type: String,
-    default: () => Guid.raw(),
-  },
-  name: {
-    type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
+};
+
+const ProductSchema = new Schema({
+  en: { ...fields },
+  am: { ...fields },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   discount: {
-    type: Number,
+    type: String,
   },
   rate: {
-    type: Number,
+    type: String,
   },
+  thumbnail: [
+    {
+      type: String,
+      required: true,
+    }
+  ],
   categories: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Category'
+      ref: 'Category',
+      required: true,
     }
   ]
 }, {

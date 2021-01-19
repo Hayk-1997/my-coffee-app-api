@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const OurStory = mongoose.model('OurStory');
 const Log = require('../../helpers/winston-logger');
-const errorMessage = require('../../helpers/errorMessage');
-const successMessage = require('../../helpers/successMessage');
+const { errorMessage } = require('../../helpers/handleMessage');
+const { successMessage } = require('../../helpers/handleMessage');
 const { setImagePath, getImageFullPath } = require('../../helpers/motations');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');

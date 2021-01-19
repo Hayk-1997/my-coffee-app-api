@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-const errorMessage = require('../../../helpers/errorMessage');
+const { errorMessage } = require('../../../helpers/handleMessage');
 const logs = require('../../../helpers/logs');
-const secret = process.env.JWT_SECRET || 'devmode';
+require('dotenv').config();
+const secret = process.env.JWT_SECRET;
 
 module.exports = function auth(req, res, next) {
   try {
