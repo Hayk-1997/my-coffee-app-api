@@ -16,22 +16,31 @@ const ProductController = require('../controllers/Admin/ProductController');
 router.post('/login', AuthController.login);
 router.post('/register', AuthController.register);
 router.post('/verify-token', AuthController.verifyAdminToken);
+
 router.get('/awesome-slider', AdminAuthMiddleware, AwesomeSliderController.get);
 router.put('/awesome-slider', AdminAuthMiddleware, upload.single('image'), AwesomeSliderController.update);
+
 router.get('/info', AdminAuthMiddleware, InfoController.get);
 router.put('/info-update', AdminAuthMiddleware, InfoController.update);
 router.put('/info/upload-icon', AdminAuthMiddleware, InfoController.uploadIcon);
+
 router.get('/our-story', AdminAuthMiddleware, OurStoryController.get);
 router.put('/our-story', AdminAuthMiddleware, upload.single('image'), OurStoryController.update);
+
 router.get('/services', AdminAuthMiddleware, ServicesController.get);
 router.put('/services', AdminAuthMiddleware, ServicesController.update);
 router.put('/services/upload-icon', AdminAuthMiddleware, ServicesController.uploadIcon);
+
 router.get('/our-menu', AdminAuthMiddleware, OurMenuController.get);
 router.put('/our-menu', AdminAuthMiddleware, OurMenuController.update);
 router.put('/our-menu-image', AdminAuthMiddleware, upload.single('image'), OurMenuController.uploadImage);
+
 router.get('/static-counter', AdminAuthMiddleware, StaticCounterController.get);
+
 router.get('/all-categories', AdminAuthMiddleware, CategoryController.get);
 router.get('/categories', AdminAuthMiddleware, CategoryController.onlyCategories);
+router.post('/category', AdminAuthMiddleware, CategoryController.create);
+router.get('/category-products/:id', AdminAuthMiddleware, CategoryController.categoryProducts);
 
 router.get('/all-products', AdminAuthMiddleware, ProductController.get);
 router.post('/product', AdminAuthMiddleware, upload.array('thumbnail' ), ProductController.create);
