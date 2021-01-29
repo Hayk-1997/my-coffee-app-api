@@ -10,7 +10,7 @@ class ProductController {
   async get (req, res) {
     try {
       Log.info('----Start ProductController get----');
-      const response = await Product.find().populate('categories');
+      const response = await Product.find().sort({ 'updatedAt': -1 }).populate('categories');
       return successMessage(res, null, 'success', response);
     } catch (e) {
       Log.info(`----[ProductController get: Error]----: ${JSON.stringify(e.message)}`);
@@ -59,11 +59,11 @@ class ProductController {
       return errorMessage(res, null, e.message);
     }
   }
-
   async update (req, res) {
     try {
       Log.info('----Start ProductController update----');
       const jsonParser = JSON.parse(req.body.form);
+      const id = req.params.id;
       const thumbnails = req.files.map((file) => setImagePath(file.destination, file.filename));
       const data = {
         en: jsonParser.en,
@@ -77,7 +77,7 @@ class ProductController {
 
       const removedThumbnails = req.body.removedThumbnails;
       removedThumbnails && removedThumbnails.length && removedThumbnails.map(thumbnail => fs.unlinkSync(thumbnail));
-      await Product.update(data, (error) => {
+      await Product.update({ _id: id }, { '$set': data }, (error) => {
         if (error) {
           return errorMessage(res, null, error.message);
         }
@@ -88,7 +88,6 @@ class ProductController {
       return errorMessage(res, null, e.message);
     }
   }
-
 }
 
 module.exports = new ProductController();

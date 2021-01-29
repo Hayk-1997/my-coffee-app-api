@@ -37,7 +37,7 @@ const ProductSchema = new Schema({
     }
   ]
 }, {
-  timestamp: true,
+  timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
 });
 
 module.exports = model('Product', ProductSchema);
