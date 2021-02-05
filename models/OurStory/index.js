@@ -33,7 +33,7 @@ const OurStorySchema = new Schema ({
     required: true,
   },
 }, {
-  timestamps: true,
+  timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
 });
 
 OurStorySchema.pre('update', function (next) {

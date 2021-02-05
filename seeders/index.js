@@ -24,11 +24,11 @@ const StaticCounterSeeding = require('./staticCounter-seeder');
 
 const Seeding = () => {
   // AdminSeeding();
-  // AwesomeSliderSeeding();
+  AwesomeSliderSeeding();
   // InfoSeeding();
   // OurStorySeeding();
   // ServiceSeeding();
   // OurMenuSeeding();
-  StaticCounterSeeding();
+  // StaticCounterSeeding();
 };
 Seeding();
