@@ -11,7 +11,9 @@ const queryEntryPoints = `
     # get OurMenu
     OurMenu: OurMenu,
     # get StaticCounter
-    StaticCounter: StaticCounter
+    StaticCounter: StaticCounter,
+    # get Products
+    Products: Products
   }
 `;
 

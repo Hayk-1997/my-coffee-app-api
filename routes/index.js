@@ -1,5 +1,7 @@
-const { Router } = require('express');
+const express = require('express');
+const { Router } = express;
 const router = Router();
+const app = express();
 
 // router.post('/social-login', CoffeeAuthController.socialLogin);
 // Use Admin Routes
@@ -11,12 +13,18 @@ const schema = require('../graphQl/schema');
 
 router.use('/coffee', graphqlHTTP({
   schema: schema,
+}));
+
+
+const graphQlSchema = ('/coffee', graphqlHTTP({
+  schema: schema,
   graphiql: true,
   playground: {
     settings: {
-      'editor.theme': 'dark',
+      'editor.theme': 'light',
     },
   },
 }));
-
+app.use(graphQlSchema).listen(4000);
+console.log('Running a GraphQL API server at http://localhost:4000/graphql');
 module.exports = router;
