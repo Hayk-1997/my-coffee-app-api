@@ -17,6 +17,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "@wiicamp/graphql-validation": "^2.2.3",
     "apollo-server-express": "^2.15.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

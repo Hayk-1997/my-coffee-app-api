@@ -101,7 +101,6 @@ AdminSchema.statics.findByCredentials = async function (email, password) {
       reject(e);
     }
   });
-
 };
 
 AdminSchema.statics.findByToken = function({ token }) {

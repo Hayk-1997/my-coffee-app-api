@@ -16,15 +16,19 @@ router.use('/coffee', graphqlHTTP({
 }));
 
 
-const graphQlSchema = ('/coffee', graphqlHTTP({
-  schema: schema,
-  graphiql: true,
-  playground: {
-    settings: {
-      'editor.theme': 'light',
+app.use('/coffee', (req, res) => {
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+    customFormatErrorFn(err) {
+      console.log('err', err);
+      res.status(500).json({
+        ...err
+      });
     },
-  },
-}));
-app.use(graphQlSchema).listen(4000);
-console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+  })(req, res);
+}).listen(4000);
+
+
+console.log('Running a GraphQL API server at http://localhost:4000/coffee');
 module.exports = router;
