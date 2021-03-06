@@ -7,6 +7,8 @@ const OurMenu = require('./OurMenu');
 const StaticCounter = require('./StaticCounter');
 const Category = require('./Category');
 const Product = require('./Product');
+// Coffee
+const User = require('./Coffee/Auth');
 
 module.exports = {
   Admin,
@@ -18,4 +20,5 @@ module.exports = {
   StaticCounter,
   Category,
   Product,
+  User,
 };

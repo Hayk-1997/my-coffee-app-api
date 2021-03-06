@@ -38,5 +38,5 @@ const AwesomeSliderType = {
 };
 
 module.exports = {
-  AwesomeSliderType
+  AwesomeSliderType,
 };
