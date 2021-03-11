@@ -15,7 +15,12 @@ class AuthController {
     try {
       Log.info('----Start CoffeeAuthController register----');
       validator(request, registerValidator, {}, (error) => error);
-      return await User.create(request);
+      const response = await User.create(request);
+      const token = jwt.sign({
+        _id: response._id,
+        expires: moment().add(1, 'days').valueOf()
+      }, secret);
+      return Object.assign(response, { token });
     } catch (e) {
       Log.info(`----[CoffeeAuthController register: Error]----: ${JSON.stringify(e.message)}`);
       throw new Error(e);

@@ -23,6 +23,7 @@ const mutation = new GraphQLObjectType({
     // addTodo: addTodoMutation.addTodo,
     registration: UserMutation.registration,
     login: UserMutation.login,
+    verifyUserToken: UserMutation.verifyUserToken,
   }
 });
 
