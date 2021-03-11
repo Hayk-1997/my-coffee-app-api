@@ -7,8 +7,8 @@ module.exports = function auth(req, res, next) {
   try {
     const token = req.headers.authorization;
     const decodedToken = jwt.verify(token, secret);
-    const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
+    const userId = decodedToken._id;
+    if (!userId) {
       throw new Error('User is not valid');
     } else {
       logs(`Valid User _id:${decodedToken._id}`);

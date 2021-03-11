@@ -7,6 +7,8 @@ require('dotenv').config();
 const secret = process.env.JWT_SECRET;
 const bcrypt = require('bcryptjs');
 const logs = require('../../../helpers/logs');
+const transport = require('../../../config/Email');
+require('dotenv').config();
 
 const UserSchema = new Schema({
   firstName: {
@@ -44,6 +46,19 @@ UserSchema.pre('save', function (next) {
   if(user.isModified('password')) {
     const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
+    const message = {
+      from: process.env.BASE_EMAIL, // Sender address
+      to: 'davo.abrahamyan.2017@gmail.com', // List of recipients
+      subject: 'Design Your Model S | Tesla', // Subject line
+      text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
+    };
+    transport.sendMail(message, function(err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(info);
+      }
+    });
     next();
   } else {
     next();
@@ -59,7 +74,7 @@ UserSchema.methods.generateToken = function (cb) {
   });
 };
 
-UserSchema.statics.findByToken = ({ token }) => {
+UserSchema.statics.findByToken = function({ token }) {
   return new Promise((resolve, reject) => {
     try {
       const user = this;

@@ -36,7 +36,7 @@ const GetAllUsersType = {
 // TODO need to improve fields validation!
 const UserMutation = {
   registration: {
-    type: (UserObjectType),
+    type: UserObjectType,
     args: {
       password: {
         type: GraphQLNonNull(GraphQLString),
@@ -59,7 +59,6 @@ const UserMutation = {
     },
     async resolve (parent, args, req, res) {
       try {
-        await authMiddleware(req, res);
         return await AuthController.register(args);
       } catch (err) {
         throw new Error(err);
@@ -67,7 +66,7 @@ const UserMutation = {
     }
   },
   login: {
-    type: (UserObjectType),
+    type: UserObjectType,
     args: {
       password: {
         type: GraphQLNonNull(GraphQLString),
@@ -80,8 +79,11 @@ const UserMutation = {
       return await AuthController.login(args);
     }
   },
-  verify: {
-
+  verifyUserToken: {
+    type: UserObjectType,
+    async resolve (parent, args, req) {
+      return await User.findByToken({ token: req.headers.authorization });
+    }
   },
 };
 
