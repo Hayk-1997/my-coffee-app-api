@@ -30,6 +30,7 @@ class ProductController {
         discount: jsonParser.discount,
         categories: jsonParser.categories.map(category => category._id),
         thumbnail: req.files.map((file) => setImagePath(file.destination, file.filename)),
+        slug: jsonParser.slug,
       };
       await Product.create(data, (error) => {
         if (error) {

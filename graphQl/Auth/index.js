@@ -57,7 +57,7 @@ const UserMutation = {
         type: GraphQLNonNull(GraphQLString),
       },
     },
-    async resolve (parent, args, req, res) {
+    async resolve (parent, args) {
       try {
         return await AuthController.register(args);
       } catch (err) {

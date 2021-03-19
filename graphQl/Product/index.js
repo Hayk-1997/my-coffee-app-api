@@ -2,6 +2,8 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
+  GraphQLObject,
+  GraphQLInputObjectType
 } = require('graphql');
 
 const mongoose = require('mongoose');
@@ -15,6 +17,7 @@ const Product = new GraphQLObjectType({
     rate: { type: GraphQLString },
     discount: { type: GraphQLString },
     price: { type: GraphQLString },
+    slug: { type: GraphQLString },
     thumbnail: { type: GraphQLList(GraphQLString) },
     mainThumbnail: {
       type: GraphQLString,
@@ -48,6 +51,18 @@ const RecentProductsType = {
   }
 };
 
+const SingleProductQuery = {
+  type: Product,
+  args: {
+    slug: { type: GraphQLString }
+  },
+  async resolve(parent, args) {
+    return ProductModel.findOne({ slug: args.slug });
+  }
+};
+
+
 module.exports = {
-  RecentProductsType
+  RecentProductsType,
+  SingleProductQuery
 };

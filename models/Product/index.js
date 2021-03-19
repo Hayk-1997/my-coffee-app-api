@@ -29,6 +29,10 @@ const ProductSchema = new Schema({
       required: true,
     }
   ],
+  slug: {
+    type: String,
+    required: true,
+  },
   categories: [
     {
       type: Schema.Types.ObjectId,
