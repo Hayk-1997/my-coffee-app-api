@@ -15,8 +15,6 @@ class AuthController {
     try {
       const admin = await Admin.findByCredentials(req.body.email, req.body.password);
       if (admin && admin._id) {
-        logs(`Logged user [${admin.email}]`);
-        logs(`Expires in ${moment().add(1, 'minute').valueOf()}`);
         const token = jwt.sign({
           _id: admin._id,
           expires: moment().add(1, 'days').valueOf()

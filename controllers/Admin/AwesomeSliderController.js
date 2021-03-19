@@ -6,7 +6,7 @@ const { errorMessage } = require('../../helpers/handleMessage');
 const { successMessage } = require('../../helpers/handleMessage');
 const validator = require('../../helpers/validate');
 const fs = require('fs-extra');
-const { ourHistoryUpdateValidation } = require('../../helpers/ValidationRules.js');
+const { awesomeSliderUpdateValidation } = require('../../helpers/ValidationRules.js');
 const Log = require('../../helpers/winston-logger');
 
 class AwesomeSliderController {
@@ -29,8 +29,8 @@ class AwesomeSliderController {
     try {
       Log.info('----Start AwesomeSliderController update----');
       const data = JSON.parse(req.body.form);
-      validator(data, ourHistoryUpdateValidation, {}, (error) => {
-        if (!status) {
+      validator(data, awesomeSliderUpdateValidation, {}, (error) => {
+        if (error) {
           return errorMessage(res, null, error);
         }
       });
