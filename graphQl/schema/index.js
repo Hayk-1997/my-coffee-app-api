@@ -1,7 +1,10 @@
 // const { makeExecutableSchema } = require('graphql-tools');
 
 const { AwesomeSliderType } = require('../AwesomeSlider');
-const { RecentProductsType } = require('../Product');
+const {
+  RecentProductsType,
+  SingleProductQuery
+} = require('../Product');
 const { OurStoryObjectType } = require('../OurStory');
 const { InfoObjectType } = require('../Info');
 const { ServiceObjectType } = require('../Service');
@@ -39,6 +42,7 @@ const schema = new GraphQLSchema({
       OurMenuQuery: OurMenuObjectObjectType,
       StaticCounterQuery: StaticCounterObjectType,
       AllUsersQuery: GetAllUsersType,
+      SingleProductQuery: SingleProductQuery,
     }
   }),
   mutation: mutation,

@@ -18,7 +18,7 @@ class AuthController {
       const response = await User.create(request);
       const token = jwt.sign({
         _id: response._id,
-        expires: moment().add(1, 'days').valueOf()
+        expires: moment().add(50, 'minutes').valueOf()
       }, secret);
       return Object.assign(response, { token });
     } catch (e) {
