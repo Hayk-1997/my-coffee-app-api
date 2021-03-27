@@ -30,7 +30,7 @@ const AwesomeSliderObjectType = new GraphQLObjectType({
   }
 });
 
-const AwesomeSliderType = {
+const AwesomeSliderQuery = {
   type: AwesomeSliderObjectType,
   resolve() {
     return AwesomeSlider.findOne();
@@ -38,5 +38,5 @@ const AwesomeSliderType = {
 };
 
 module.exports = {
-  AwesomeSliderType,
+  AwesomeSliderQuery,
 };

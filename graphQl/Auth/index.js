@@ -5,6 +5,7 @@ const {
   GraphQLID,
   GraphQLNonNull
 } = require('graphql');
+
 const { validator, validate } = require('@wiicamp/graphql-validation'); // Import module
 const authMiddleware = require('../../middlewares/Coffee/Auth');
 const mongoose = require('mongoose');
@@ -26,7 +27,7 @@ const UserObjectType = new GraphQLObjectType({
   }),
 });
 
-const GetAllUsersType = {
+const GetAllUsersQuery = {
   type: GraphQLList(UserObjectType),
   async resolve() {
     return await User.find({});
@@ -88,6 +89,6 @@ const UserMutation = {
 };
 
 module.exports = {
-  GetAllUsersType,
+  GetAllUsersQuery,
   UserMutation
 };

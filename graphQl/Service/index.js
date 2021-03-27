@@ -87,7 +87,7 @@ const ServiceObject = new GraphQLObjectType({
   }
 });
 
-const ServiceObjectType = {
+const ServiceQuery = {
   type: ServiceObject,
   resolve () {
     return Service.findOne();
@@ -95,5 +95,5 @@ const ServiceObjectType = {
 };
 
 module.exports = {
-  ServiceObjectType
+  ServiceQuery
 };

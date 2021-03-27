@@ -4,6 +4,7 @@ const app = express();
 require('dotenv').config();
 const PORT = 3500;
 const connect = require('../db');
+// eslint-disable-next-line no-undef
 const DB = process.env.MONGO_URI;
 const listen = () => {
   logs(`Database connected at ${DB}`);
@@ -20,15 +21,16 @@ const OurStorySeeding = require('./ourStory-seeder');
 const ServiceSeeding = require('./service-seeder');
 const OurMenuSeeding = require('./ourMenu-seeder');
 const StaticCounterSeeding = require('./staticCounter-seeder');
-
+const CartSeeding = require('./cart-seeder');
 
 const Seeding = () => {
   // AdminSeeding();
-  AwesomeSliderSeeding();
+  // AwesomeSliderSeeding();
   // InfoSeeding();
   // OurStorySeeding();
   // ServiceSeeding();
   // OurMenuSeeding();
   // StaticCounterSeeding();
+  CartSeeding();
 };
 Seeding();

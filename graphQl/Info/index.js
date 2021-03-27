@@ -87,7 +87,7 @@ const InfoObject = new GraphQLObjectType({
   }
 });
 
-const InfoObjectType = {
+const InfoQuery = {
   type: InfoObject,
   resolve () {
     return Info.findOne();
@@ -95,5 +95,5 @@ const InfoObjectType = {
 };
 
 module.exports = {
-  InfoObjectType
+  InfoQuery
 };
