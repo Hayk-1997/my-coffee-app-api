@@ -9,6 +9,7 @@ const Category = require('./Category');
 const Product = require('./Product');
 // Coffee
 const User = require('./Coffee/Auth');
+const Cart = require('./Cart');
 
 module.exports = {
   Admin,
@@ -21,4 +22,5 @@ module.exports = {
   Category,
   Product,
   User,
+  Cart,
 };

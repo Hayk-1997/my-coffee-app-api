@@ -18,7 +18,7 @@ const StaticCounterObject = new GraphQLObjectType({
   }
 });
 
-const StaticCounterObjectType = {
+const StaticCounterQuery = {
   type: StaticCounterObject,
   resolve () {
     return StaticCounter.findOne();
@@ -26,14 +26,5 @@ const StaticCounterObjectType = {
 };
 
 module.exports = {
-  StaticCounterObjectType
+  StaticCounterQuery
 };
-
-// module.exports = `
-//   type StaticCounter {
-//     coffeeBranches: String!
-//     awards: String!
-//     customers: String!
-//     staffs: String!
-//   }
-// `;

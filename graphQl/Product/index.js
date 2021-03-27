@@ -2,8 +2,6 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLObject,
-  GraphQLInputObjectType
 } = require('graphql');
 
 const mongoose = require('mongoose');
@@ -44,7 +42,7 @@ const Product = new GraphQLObjectType({
 });
 
 
-const RecentProductsType = {
+const RecentProductsQuery = {
   type: GraphQLList(Product),
   resolve() {
     return ProductModel.find({ rate: 5 }).limit(4);
@@ -63,6 +61,7 @@ const SingleProductQuery = {
 
 
 module.exports = {
-  RecentProductsType,
+  Product,
+  RecentProductsQuery,
   SingleProductQuery
 };

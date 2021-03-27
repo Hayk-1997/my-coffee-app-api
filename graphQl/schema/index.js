@@ -1,18 +1,17 @@
-// const { makeExecutableSchema } = require('graphql-tools');
-
-const { AwesomeSliderType } = require('../AwesomeSlider');
+const { AwesomeSliderQuery } = require('../AwesomeSlider');
 const {
-  RecentProductsType,
+  RecentProductsQuery,
   SingleProductQuery
 } = require('../Product');
-const { OurStoryObjectType } = require('../OurStory');
-const { InfoObjectType } = require('../Info');
-const { ServiceObjectType } = require('../Service');
-const { OurMenuObjectObjectType } = require('../OurMenu');
-const { StaticCounterObjectType } = require('../StaticCounter');
+const { OurStoryQuery } = require('../OurStory');
+const { InfoQuery } = require('../Info');
+const { ServiceQuery } = require('../Service');
+const { OurMenuQuery } = require('../OurMenu');
+const { StaticCounterQuery } = require('../StaticCounter');
 
 //
-const { GetAllUsersType, UserMutation } = require('../Auth/index');
+const { GetAllUsersQuery, UserMutation } = require('../Auth/index');
+const { CartQuery, CartMutation } = require('../Cart');
 
 const {
   GraphQLSchema,
@@ -23,10 +22,10 @@ const {
 const mutation = new GraphQLObjectType({
   name: 'MutationType',
   fields: {
-    // addTodo: addTodoMutation.addTodo,
     registration: UserMutation.registration,
     login: UserMutation.login,
     verifyUserToken: UserMutation.verifyUserToken,
+    addToCart: CartMutation.addToCart,
   }
 });
 
@@ -34,15 +33,16 @@ const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-      AwesomeSliderQuery: AwesomeSliderType,
-      RecentProductsQuery: RecentProductsType,
-      OurStoryQuery: OurStoryObjectType,
-      InfoQuery: InfoObjectType,
-      ServiceQuery: ServiceObjectType,
-      OurMenuQuery: OurMenuObjectObjectType,
-      StaticCounterQuery: StaticCounterObjectType,
-      AllUsersQuery: GetAllUsersType,
+      AwesomeSliderQuery: AwesomeSliderQuery,
+      RecentProductsQuery: RecentProductsQuery,
+      OurStoryQuery: OurStoryQuery,
+      InfoQuery: InfoQuery,
+      ServiceQuery: ServiceQuery,
+      OurMenuQuery: OurMenuQuery,
+      StaticCounterQuery: StaticCounterQuery,
+      AllUsersQuery: GetAllUsersQuery,
       SingleProductQuery: SingleProductQuery,
+      CartQuery: CartQuery,
     }
   }),
   mutation: mutation,

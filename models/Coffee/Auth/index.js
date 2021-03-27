@@ -4,6 +4,7 @@ const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+// eslint-disable-next-line no-undef
 const secret = process.env.JWT_SECRET;
 const bcrypt = require('bcryptjs');
 const logs = require('../../../helpers/logs');
@@ -47,8 +48,9 @@ UserSchema.pre('save', function (next) {
     const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
     const message = {
+      // eslint-disable-next-line no-undef
       from: process.env.BASE_EMAIL, // Sender address
-      to: 'davo.abrahamyan.2017@gmail.com', // List of recipients
+      to: user.email, // List of recipients
       subject: 'Design Your Model S | Tesla', // Subject line
       text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
     };

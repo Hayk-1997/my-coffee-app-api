@@ -101,7 +101,7 @@ const OurMenuObject = new GraphQLObjectType({
   }
 });
 
-const OurMenuObjectObjectType = {
+const OurMenuQuery = {
   type: OurMenuObject,
   resolve () {
     return OurMenu.findOne();
@@ -109,5 +109,5 @@ const OurMenuObjectObjectType = {
 };
 
 module.exports = {
-  OurMenuObjectObjectType
+  OurMenuQuery
 };

@@ -33,7 +33,7 @@ const OurStoryObject = new GraphQLObjectType({
   }
 });
 
-const OurStoryObjectType = {
+const OurStoryQuery = {
   type: OurStoryObject,
   resolve () {
     return OurStory.findOne();
@@ -41,5 +41,5 @@ const OurStoryObjectType = {
 };
 
 module.exports = {
-  OurStoryObjectType
+  OurStoryQuery
 };
