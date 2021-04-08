@@ -4,12 +4,33 @@ const {
   GraphQLList,
   GraphQLID,
   GraphQLNonNull,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLInputObjectType
 } = require('graphql');
 
 const mongoose = require('mongoose');
 const Cart = mongoose.model('Cart');
 const { Product } = require('../Product');
+
+
+const TypeObjectType = new GraphQLObjectType({
+  name: 'type',
+  fields: () => ({
+    label: { type: GraphQLString },
+    price: { type: GraphQLString },
+    discount: { type: GraphQLString },
+  })
+});
+
+const TypeInput = new GraphQLInputObjectType({
+  name: 'TypeInput',
+  fields: () => ({
+    label: { type: GraphQLString },
+    price: { type: GraphQLString },
+    discount: { type: GraphQLString },
+  })
+});
+
 
 const CartObjectType = new GraphQLObjectType({
   name: 'Cart',
@@ -21,7 +42,7 @@ const CartObjectType = new GraphQLObjectType({
       type: Product,
     },
     quantity: { type: GraphQLString },
-    type: { type: GraphQLString },
+    type: { type: TypeObjectType },
   })
 });
 
@@ -50,7 +71,7 @@ const CartMutation = {
         type: GraphQLNonNull(GraphQLInt),
       },
       type: {
-        type: GraphQLNonNull(GraphQLString),
+        type: GraphQLNonNull(TypeInput),
       }
     },
     async resolve(parent, args) {

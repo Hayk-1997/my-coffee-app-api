@@ -19,11 +19,14 @@ app.use(bodyParser.json());
 const routes = require('./routes');
 app.use('/api/v1', routes);
 //
+// eslint-disable-next-line no-undef
 app.use('/api/v1/public', express.static(path.join(__dirname, 'public')));
 // Start run environment
 require('dotenv').config();
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3100;
 const connect = require('./db');
+// eslint-disable-next-line no-undef
 const DB = process.env.MONGO_URI;
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found', status: 404 });

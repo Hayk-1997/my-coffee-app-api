@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
+const type = {
+  label: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: String,
+    required: true,
+  },
+  discount: {
+    type: String,
+  }
+}
 const CartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -17,10 +30,7 @@ const CartSchema = new Schema({
     ref: 'Product',
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
-  }
+  type: type
 });
 
 module.exports = model('Cart', CartSchema);
