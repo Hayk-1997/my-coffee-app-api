@@ -7,6 +7,12 @@ const { setImagePath } = require('../../helpers/motations');
 const fs = require('fs');
 
 class ProductController {
+  /**
+   *
+   * @param req
+   * @param res
+   * @returns {Promise<*>}
+   */
   async get (req, res) {
     try {
       Log.info('----Start ProductController get----');
@@ -17,15 +23,20 @@ class ProductController {
       return errorMessage(res, null, e.message);
     }
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @returns {Promise<*>}
+   */
   async create (req, res) {
     try {
       Log.info('----Start ProductController create----');
       const jsonParser = JSON.parse(req.body.form);
-
       const data = {
         en: jsonParser.en,
         am: jsonParser.am,
-        price: jsonParser.price,
         rate: jsonParser.rate,
         discount: jsonParser.discount,
         categories: jsonParser.categories.map(category => category._id),
@@ -43,6 +54,13 @@ class ProductController {
       return errorMessage(res, null, e.message);
     }
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @returns {Promise<*>}
+   */
   async destroy(req, res) {
     try {
       Log.info('----Start ProductController destroy----');
@@ -60,6 +78,13 @@ class ProductController {
       return errorMessage(res, null, e.message);
     }
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @returns {Promise<*>}
+   */
   async update (req, res) {
     try {
       Log.info('----Start ProductController update----');

@@ -8,18 +8,26 @@ const fields = {
   description: {
     type: String,
   },
+  types:[
+    {
+      label: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: String,
+        required: true,
+      },
+      discount: {
+        type: String,
+      }
+    }
+  ]
 };
 
 const ProductSchema = new Schema({
   en: { ...fields },
   am: { ...fields },
-  price: {
-    type: String,
-    required: true,
-  },
-  discount: {
-    type: String,
-  },
   rate: {
     type: String,
   },

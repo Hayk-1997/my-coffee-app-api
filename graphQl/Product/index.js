@@ -7,6 +7,16 @@ const {
 const mongoose = require('mongoose');
 const ProductModel = mongoose.model('Product');
 
+
+const TypesObjectType = new GraphQLObjectType({
+  name: 'types',
+  fields: () => ({
+    label: { type: GraphQLString },
+    price: { type: GraphQLString },
+    discount: { type: GraphQLString },
+  }),
+});
+
 const Product = new GraphQLObjectType({
   name:  'Product',
   fields: () => ({
@@ -14,7 +24,6 @@ const Product = new GraphQLObjectType({
     description: { type: GraphQLString },
     rate: { type: GraphQLString },
     discount: { type: GraphQLString },
-    price: { type: GraphQLString },
     slug: { type: GraphQLString },
     thumbnail: { type: GraphQLList(GraphQLString) },
     mainThumbnail: {
@@ -28,6 +37,7 @@ const Product = new GraphQLObjectType({
         fields: () => ({
           title: { type: GraphQLString },
           description: { type: GraphQLString },
+          types: { type: GraphQLList(TypesObjectType) }
         })
       }) },
     am: {
@@ -36,6 +46,7 @@ const Product = new GraphQLObjectType({
         fields: () => ({
           title: { type: GraphQLString },
           description: { type: GraphQLString },
+          types: { type: GraphQLList(TypesObjectType) }
         })
       }) },
   })
