@@ -13,7 +13,8 @@ const type = {
   discount: {
     type: String,
   }
-}
+};
+
 const CartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,

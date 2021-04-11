@@ -5,8 +5,8 @@ const {
 } = require('graphql');
 
 const mongoose = require('mongoose');
-const ProductModel = mongoose.model('Product');
-
+const { CategoryObjectType } = require('../Category');
+const Product = mongoose.model('Product');
 
 const TypesObjectType = new GraphQLObjectType({
   name: 'types',
@@ -17,20 +17,21 @@ const TypesObjectType = new GraphQLObjectType({
   }),
 });
 
-const Product = new GraphQLObjectType({
+const ProductObjectType = new GraphQLObjectType({
   name:  'Product',
   fields: () => ({
     _id: { type: GraphQLString },
-    description: { type: GraphQLString },
     rate: { type: GraphQLString },
-    discount: { type: GraphQLString },
     slug: { type: GraphQLString },
     thumbnail: { type: GraphQLList(GraphQLString) },
     mainThumbnail: {
       type: GraphQLString,
       resolve: (arg) => arg.thumbnail[0]
     },
-    categories: { type: GraphQLList(GraphQLString) },
+    categories: {
+      type: GraphQLList(CategoryObjectType),
+      resolve: () => Product.find().populate('categories'),
+    },
     en: {
       type: new GraphQLObjectType({
         name: 'en',
@@ -54,25 +55,25 @@ const Product = new GraphQLObjectType({
 
 
 const RecentProductsQuery = {
-  type: GraphQLList(Product),
+  type: GraphQLList(ProductObjectType),
   resolve() {
-    return ProductModel.find({ rate: 5 }).limit(4);
+    return Product.find({ rate: 5 }).limit(4);
   }
 };
 
 const SingleProductQuery = {
-  type: Product,
+  type: ProductObjectType,
   args: {
     slug: { type: GraphQLString }
   },
   async resolve(parent, args) {
-    return ProductModel.findOne({ slug: args.slug });
+    return Product.findOne({ slug: args.slug });
   }
 };
 
 
 module.exports = {
-  Product,
+  ProductObjectType,
   RecentProductsQuery,
   SingleProductQuery
 };
