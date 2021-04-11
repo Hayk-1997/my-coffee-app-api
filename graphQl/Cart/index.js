@@ -10,17 +10,8 @@ const {
 
 const mongoose = require('mongoose');
 const Cart = mongoose.model('Cart');
-const { Product } = require('../Product');
-
-
-const TypeObjectType = new GraphQLObjectType({
-  name: 'type',
-  fields: () => ({
-    label: { type: GraphQLString },
-    price: { type: GraphQLString },
-    discount: { type: GraphQLString },
-  })
-});
+const { ProductObjectType } = require('../Product');
+const CartController = require('../../controllers/Coffee/CartController');
 
 const TypeInput = new GraphQLInputObjectType({
   name: 'TypeInput',
@@ -31,31 +22,37 @@ const TypeInput = new GraphQLInputObjectType({
   })
 });
 
-
 const CartObjectType = new GraphQLObjectType({
   name: 'Cart',
   fields: () => ({
     _id: { type: GraphQLID },
     user: { type: GraphQLString },
     product: {
-      name: 'CartProduct',
-      type: Product,
+      type: ProductObjectType,
     },
     quantity: { type: GraphQLString },
     type: { type: TypeObjectType },
   })
 });
 
-
 const CartQuery = {
   type: GraphQLList(CartObjectType),
   args: {
     user: { type: GraphQLString }
   },
-  async resolve(parent, args) {
-    return await Cart.find({ user: args.user });
+  resolve(parent, args) {
+    return Cart.find({ user: args.user }).populate({ path: 'product' });
   }
 };
+
+const TypeObjectType = new GraphQLObjectType({
+  name: 'type',
+  fields: () => ({
+    label: { type: GraphQLString },
+    price: { type: GraphQLString },
+    discount: { type: GraphQLString },
+  })
+});
 
 const CartMutation = {
   addToCart: {
@@ -74,8 +71,8 @@ const CartMutation = {
         type: GraphQLNonNull(TypeInput),
       }
     },
-    async resolve(parent, args) {
-      return Cart.create({ ...args });
+    async resolve (parent, args) {
+      return CartController.store(args);
     }
   }
 };
