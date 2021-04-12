@@ -1,9 +1,9 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLList,
+  GraphQLList
 } = require('graphql');
-
+const GraphQLDate = require('graphql-date');
 const mongoose = require('mongoose');
 const { CategoryObjectType } = require('../Category');
 const Product = mongoose.model('Product');
@@ -34,7 +34,7 @@ const ProductObjectType = new GraphQLObjectType({
     },
     en: {
       type: new GraphQLObjectType({
-        name: 'en',
+        name: 'product_en',
         fields: () => ({
           title: { type: GraphQLString },
           description: { type: GraphQLString },
@@ -43,13 +43,14 @@ const ProductObjectType = new GraphQLObjectType({
       }) },
     am: {
       type: new GraphQLObjectType({
-        name: 'am',
+        name: 'product_am',
         fields: () => ({
           title: { type: GraphQLString },
           description: { type: GraphQLString },
           types: { type: GraphQLList(TypesObjectType) }
         })
       }) },
+    createdAt: { type: GraphQLDate }
   })
 });
 
