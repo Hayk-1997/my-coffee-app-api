@@ -27,9 +27,7 @@ const CartObjectType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLID },
     user: { type: GraphQLString },
-    product: {
-      type: ProductObjectType,
-    },
+    product: { type: ProductObjectType },
     quantity: { type: GraphQLString },
     type: { type: TypeObjectType },
   })

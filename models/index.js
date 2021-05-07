@@ -10,6 +10,7 @@ const Product = require('./Product');
 // Coffee
 const User = require('./Coffee/Auth');
 const Cart = require('./Cart');
+const Comment = require('./Comment');
 
 module.exports = {
   Admin,
@@ -23,4 +24,5 @@ module.exports = {
   Product,
   User,
   Cart,
+  Comment
 };

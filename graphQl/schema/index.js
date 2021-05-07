@@ -1,7 +1,9 @@
 const { AwesomeSliderQuery } = require('../AwesomeSlider');
 const {
   RecentProductsQuery,
-  SingleProductQuery
+  SingleProductQuery,
+  ProductMutation,
+  CommentQuery
 } = require('../Product');
 const { OurStoryQuery } = require('../OurStory');
 const { InfoQuery } = require('../Info');
@@ -26,6 +28,8 @@ const mutation = new GraphQLObjectType({
     login: UserMutation.login,
     verifyUserToken: UserMutation.verifyUserToken,
     addToCart: CartMutation.addToCart,
+    createProductComment: ProductMutation.createComment,
+    replyProductComment: ProductMutation.replyComment
   }
 });
 
@@ -43,6 +47,7 @@ const schema = new GraphQLSchema({
       AllUsersQuery: GetAllUsersQuery,
       SingleProductQuery: SingleProductQuery,
       CartQuery: CartQuery,
+      CommentQuery: CommentQuery
     }
   }),
   mutation: mutation,

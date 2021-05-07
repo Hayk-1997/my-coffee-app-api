@@ -1,22 +1,26 @@
-const mongoose = require('mongoose');
-const Product = mongoose.model('Product');
+const { model } = require('mongoose');
+const Product = model('Product');
+const Comment = model('Comment');
 const Log = require('../../helpers/winston-logger');
 
 class ProductController {
-  async getTopProducts () {
-    try {
-      Log.info('----Start ProductController get----');
-      const response = await Product.find({});
-      if (response) {
-        Log.info(`----[ProductController get Success]---- ${JSON.stringify(response)}`);
-        return { ...response };
-      } else {
-        Log.info('----[ProductController get Error]----');
-      }
-    } catch (e) {
-      Log.info(`----[ProductController get:Error]----: ${JSON.stringify(e.message)}`);
-      return { ...e.message };
-    }
+  async createProductComment(req, res) {
+    const product = await Product.findById(req._id);
+    const newComment = await Comment.create({ content: req.comment });
+    product.comments.unshift(newComment._id);
+    await product.save();
+    return newComment;
+  }
+
+  async replyComment(req, res) {
+    const comment = await Comment.findById(req.commentId);
+    const product = await Product.findById(req._id);
+    const reply = await Comment.create({ content: req.comment });
+    product.comments.push(reply._id);
+    product.save();
+    reply.parentId = comment._id;
+    return reply.save();
+
   }
 }
 

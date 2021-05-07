@@ -47,9 +47,24 @@ const ProductSchema = new Schema({
       ref: 'Category',
       required: true,
     }
+  ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    }
   ]
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
 });
+
+const populate = field => {
+  return function(next) {
+    this.populate(field);
+    next();
+  };
+};
+
+ProductSchema.pre('findOne', populate('comments'));
 
 module.exports = model('Product', ProductSchema);

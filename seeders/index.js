@@ -22,6 +22,7 @@ const ServiceSeeding = require('./service-seeder');
 const OurMenuSeeding = require('./ourMenu-seeder');
 const StaticCounterSeeding = require('./staticCounter-seeder');
 const CartSeeding = require('./cart-seeder');
+const CommentSeeding = require('./comment-seeder');
 
 const Seeding = () => {
   // AdminSeeding();
@@ -31,6 +32,7 @@ const Seeding = () => {
   // ServiceSeeding();
   // OurMenuSeeding();
   // StaticCounterSeeding();
-  CartSeeding();
+  // CartSeeding();
+  CommentSeeding();
 };
 Seeding();
